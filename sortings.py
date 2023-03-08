@@ -11,8 +11,8 @@ def selection_sort(sortable_list):
 
 
 def bubble_sort(sortable_list):
-    for i in range(0, len(sortable_list)):
-        for j in range(0, len(sortable_list) - 1):
+    for i in range(len(sortable_list)):
+        for j in range(len(sortable_list) - 1):
             if sortable_list[i] < sortable_list[j]:
                 sortable_list[i], sortable_list[j] = sortable_list[j], sortable_list[i]
 
