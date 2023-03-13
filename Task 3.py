@@ -10,9 +10,8 @@ try:
         if x == 1 or a == -2:
             print('Incorrect value')
         else:
+            y = (x ** 3 + 2 * a * x + 3) / ((x - 1) ** 2) + (math.cos(x ** 2)) / (a + 2)
+            print(y)
             break
 except ValueError:
     print('Incorrect input')
-
-    y = (x ** 3 + 2 * a * x + 3) / ((x - 1) ** 2) + (math.cos(x ** 2)) / (a + 2)
-    print(y)
