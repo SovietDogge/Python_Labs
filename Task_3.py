@@ -1,7 +1,6 @@
 # Multiparadigm programming languages, Task 1
 # Vanda Nikita Denisovich
 import math
-TEMPLATE = 'Incorrect value'
 
 try:
 
@@ -9,7 +8,7 @@ try:
         x = float(input())
         a = float(input())
         if x == 1 or a == -2:
-            print(TEMPLATE)
+            print('Incorrect value')
         else:
             break
 except ValueError:
