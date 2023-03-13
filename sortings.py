@@ -21,8 +21,10 @@ def insertion_sort(sortable_list):
     for i in range(1, len(sortable_list)):
         current_ind = i
         while sortable_list[current_ind] < sortable_list[current_ind - 1]:
+
             sortable_list[current_ind], sortable_list[current_ind - 1] = \
                 sortable_list[current_ind - 1], sortable_list[current_ind]
+
             if current_ind != 1:
                 current_ind = current_ind - 1
 
@@ -34,14 +36,14 @@ def counting_sort(sortable_list):
         if sortable_list[i] > max_num:
             max_num = sortable_list[i]
 
-    count_nums = [0 for i in range(max_num + 1)]
+    count_nums = [0 for _ in range(max_num + 1)]
 
     for i in range(len(sortable_list)):
         count_nums[sortable_list[i]] += 1
 
     sortable_list.clear()
 
-    sortable_list = [sortable_list.append(i) for i in range(len(count_nums)) for j in range(count_nums[i])]
+    sortable_list = [sortable_list.append(i) for i in range(len(count_nums)) for _ in range(count_nums[i])]
 
 
 def merge_sort(sortable_list):
