@@ -2,17 +2,14 @@
 # Vanda Nikita Denisovich
 
 try:
-
     while True:
         x = float(input())
         y = float(input())
         z = float(input())
-        if y == 0 or z == 87:
-            print('Incorrect value')
-        else:
+
+        if y != 0 and z != 87:
+            print(x + (11 - x / y) / (87 - z))
             break
-
+        print('Incorrect value')
 except ValueError:
-    print('Incorrect input')
-
-print(x + (11 - x / y) / (87 - z))
+    raise Exception('Incorrect input')
