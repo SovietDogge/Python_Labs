@@ -1,5 +1,6 @@
 # Multiparadigm programming languages, Task 1
 # Vanda Nikita Denisovich
+INCORRECT_MESSAGE = 'Incorrect input'
 
 try:
     while True:
@@ -10,6 +11,6 @@ try:
         if y != 0 and z != 87:
             print(x + (11 - x / y) / (87 - z))
             break
-        print('Incorrect value')
+        print(INCORRECT_MESSAGE)
 except ValueError:
-    raise Exception('Incorrect input')
+    print(INCORRECT_MESSAGE)
