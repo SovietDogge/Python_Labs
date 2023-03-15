@@ -3,8 +3,7 @@
 
 n = int(input('Enter a num:'))
 
-k = 1
+k = 3
 while k <= n:
-    if k % 10 == 3:
-        print(k)
-    k += 1
+    print(k)
+    k += 10
