@@ -2,32 +2,29 @@ import random
 
 
 def selection_sort(sortable_list):
-    for i in range(0, len(sortable_list)):
+    for i in range(len(sortable_list)):
         min_num_ind = i
         for j in range(i, len(sortable_list)):
             if sortable_list[min_num_ind] > sortable_list[j]:
                 min_num_ind = j
-        temp = sortable_list[min_num_ind]
-        sortable_list[min_num_ind] = sortable_list[i]
-        sortable_list[i] = temp
+        sortable_list[min_num_ind], sortable_list[i] = sortable_list[i], sortable_list[min_num_ind]
 
 
 def bubble_sort(sortable_list):
-    for i in range(0, len(sortable_list)):
-        for j in range(0, len(sortable_list) - 1):
+    for i in range(len(sortable_list)):
+        for j in range(len(sortable_list) - 1):
             if sortable_list[i] < sortable_list[j]:
-                temp = sortable_list[i]
-                sortable_list[i] = sortable_list[j]
-                sortable_list[j] = temp
+                sortable_list[i], sortable_list[j] = sortable_list[j], sortable_list[i]
 
 
 def insertion_sort(sortable_list):
     for i in range(1, len(sortable_list)):
         current_ind = i
         while sortable_list[current_ind] < sortable_list[current_ind - 1]:
-            temp = sortable_list[current_ind]
-            sortable_list[current_ind] = sortable_list[current_ind - 1]
-            sortable_list[current_ind - 1] = temp
+
+            sortable_list[current_ind], sortable_list[current_ind - 1] = \
+                sortable_list[current_ind - 1], sortable_list[current_ind]
+
             if current_ind != 1:
                 current_ind = current_ind - 1
 
@@ -35,22 +32,18 @@ def insertion_sort(sortable_list):
 def counting_sort(sortable_list):
     max_num = 0
 
-    for i in range(0, len(sortable_list)):
+    for i in range(len(sortable_list)):
         if sortable_list[i] > max_num:
             max_num = sortable_list[i]
 
-    count_nums = []
-    for i in range(0, max_num + 1):
-        count_nums.append(0)
+    count_nums = [0 for _ in range(max_num + 1)]
 
-    for i in range(0, len(sortable_list)):
+    for i in range(len(sortable_list)):
         count_nums[sortable_list[i]] += 1
 
     sortable_list.clear()
 
-    for i in range(0, len(count_nums)):
-        for j in range(0, count_nums[i]):
-            sortable_list.append(i)
+    sortable_list = [sortable_list.append(i) for i in range(len(count_nums)) for _ in range(count_nums[i])]
 
 
 def merge_sort(sortable_list):
@@ -58,16 +51,10 @@ def merge_sort(sortable_list):
     if len(sortable_list) == 1:
         return sortable_list
 
-    left_part = []
-    right_part = []
-
     size = int(len(sortable_list) / 2)
 
-    for i in range(0, size):
-        left_part.append(sortable_list[i])
-
-    for i in range(size, len(sortable_list)):
-        right_part.append(sortable_list[i])
+    left_part = [sortable_list[i] for i in range(size)]
+    right_part = [sortable_list[i] for i in range(size, len(sortable_list))]
 
     left_part = merge_sort(left_part)
     right_part = merge_sort(right_part)
