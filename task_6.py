@@ -26,4 +26,12 @@ def task_2():
         print('It must be a number')
 
 
-task_2()
+def task_3():
+    python_features = []
+    with open('learning_python.txt', 'rt') as file:
+        for line in file:
+            python_features.append(line)
+    print(python_features)
+
+
+task_3()
