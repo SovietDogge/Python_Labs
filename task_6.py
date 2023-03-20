@@ -34,4 +34,13 @@ def task_3():
     print(python_features)
 
 
-task_3()
+def task_4():
+    python_features = []
+    with open('learning_python.txt', 'rt') as file:
+        for line in file:
+            line = line.replace('Python', 'C++')
+            python_features.append(line)
+    print(python_features)
+
+
+task_4()
