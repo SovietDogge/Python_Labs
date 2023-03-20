@@ -53,4 +53,11 @@ def task_5():
             file.write(greeting)
 
 
-task_5()
+def task_6():
+    with open('book_1.txt', 'rt') as book:
+        data = book.read()
+        data = data.lower()
+        print(data.count('the'))
+
+
+task_6()
