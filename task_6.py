@@ -43,4 +43,14 @@ def task_4():
     print(python_features)
 
 
-task_4()
+def task_5():
+    with open('guest_book.txt', 'a') as file:
+        while True:
+            name = input()
+            if name == '0':
+                break
+            greeting = f'Welcome! {name}\n'
+            file.write(greeting)
+
+
+task_5()
