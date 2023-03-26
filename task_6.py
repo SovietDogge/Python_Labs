@@ -1,3 +1,6 @@
+import sqlite3 as sq
+
+
 NUM_CHECK_PAIRED = 'num_characteristic.txt'
 
 
@@ -60,4 +63,78 @@ def task_6():
         print(data.count('the'))
 
 
-task_6()
+def task_7():
+    with open('70321-0.txt', 'rt') as book:
+        formatted_book = book.read()
+        formatted_book = formatted_book.replace('\n', ' ')
+        with open('formatted_text.txt', 'wt') as file:
+            file.write(formatted_book)
+
+
+def task_8():
+    chapters = []
+    with open('521-0.txt', 'rt', encoding='UTF-8') as book:
+        for line in book:
+            if 'CHAPTER' in line:
+                chapters.append(line)
+
+    for chapter in chapters:
+        for string in chapters:
+            if chapter[chapter.find('—') + 1:] in string and chapter != string:
+                chapters.remove(string)
+
+    with open('chapters.txt', 'wt', encoding='UTF-8') as file:
+        for elem in chapters:
+            file.write(elem + '\n')
+
+
+def task_9():
+    count_upper_letters = 0
+    count_lower_letters = 0
+    with open('1184-0.txt', 'rt', encoding='UTF-8') as book:
+        text = book.read()
+        for letter in text:
+            if letter.isalpha():
+                if letter in 'QWERTYUIOPASDFGHJKLZXCVBNM':
+                    count_upper_letters += 1
+                if letter in 'qwertyuiopasdfghjklzxcvbnm':
+                    count_lower_letters += 1
+
+    count_letters = count_upper_letters + count_lower_letters
+    print(f'Percentage of upper letters is {(count_upper_letters / count_letters) * 100}')
+    print(f'Percentage of lower letters is {(count_lower_letters / count_letters) * 100}')
+
+
+def task_10():
+    with sq.connect('imdb.db') as db_imdb:
+        cur = db_imdb.cursor()
+        cur.execute('''CREATE TABLE IF NOT EXISTS ratings
+        (id INTEGER PRIMARY KEY,
+        title VARCHAR(20), 
+        year INT, 
+        rating FLOAT)
+        ''')
+        with open('imdb.csv', 'r') as file:
+            for line in file:
+                print(line.split(', '))
+                line = line.strip()
+                cur.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)', line.split(', '))
+                db_imdb.commit()
+        cur.execute('SELECT * FROM ratings')
+        db_imdb.commit()
+        films = cur.fetchall()
+        print(films)
+        cur.execute('''SELECT * FROM ratings
+                            WHERE rating > 8.7
+                            order by title''')
+        db_imdb.commit()
+        films = cur.fetchall()
+        print(films)
+        cur.execute('''SELECT * FROM ratings
+                                order by title''')
+        db_imdb.commit()
+        films = cur.fetchall()
+        print(films)
+
+
+task_10()
