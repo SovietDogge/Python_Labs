@@ -1,3 +1,3 @@
 
-def test_try():
+def test_validate():
     assert True
