@@ -63,6 +63,7 @@ def validate(value):
         return float(value)
     except ValueError:
         print(f'Incorrect value - {value}')
+    return None
 
 
 if __name__ == '__main__':
