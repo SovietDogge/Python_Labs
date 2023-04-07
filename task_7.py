@@ -11,13 +11,11 @@ class Point:
         return f'x = {self.__x}, y = {self.__y}'
 
     def __sub__(self, other):
-
         x = self.__x - other.__x
         y = self.__y - other.__y
         return Point(x, y)
 
     def __add__(self, other):
-
         x = self.__x + other.__x
         y = self.__y + other.__y
         return Point(x, y)
@@ -50,8 +48,8 @@ class Line:
                      (self.__end_point.y - self.__start_point.y) / 2)
 
     def find_length(self):
-        return m.sqrt((self.__end_point.x - self.__start_point.x) ** 2 +
-                      (self.__end_point.y - self.__start_point.y) ** 2)
+        return round(m.sqrt((self.__end_point.x - self.__start_point.x) ** 2 +
+                            (self.__end_point.y - self.__start_point.y) ** 2), 2)
 
     def find_x_projection(self):
         return abs(self.__end_point.x - self.__start_point.x)
@@ -72,3 +70,6 @@ if __name__ == '__main__':
     b = Point(12, 20)
     exmpl = Line(a, b)
     print(exmpl.find_middle_point())
+    print(exmpl.find_length())
+    print(exmpl.find_x_projection())
+    print(exmpl.find_y_projection())
