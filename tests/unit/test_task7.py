@@ -47,16 +47,6 @@ def test_str(point, expected_output):
     assert actual == expected_output
 
 
-@pytest.mark.parametrize('number, expected_output', [(3, 3)])
-def test_get_x(number, expected_output):
-    assert number == expected_output
-
-
-@pytest.mark.parametrize('number, expected_output', [(4, 4)])
-def test_get_y(number, expected_output):
-    assert number == expected_output
-
-
 @pytest.mark.parametrize('test_line, expected_output',
                          [(Line(Point(6, 10), Point(12, 20)), 'x = 3.0, y = 5.0')])
 def test_find_middle_point(test_line, expected_output):
