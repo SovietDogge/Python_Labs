@@ -1,5 +1,7 @@
 import math as m
 
+from utils import validate
+
 
 class Point:
 
@@ -58,17 +60,9 @@ class Line:
         return abs(self.__end_point.y - self.__start_point.y)
 
 
-def validate(value):
-    try:
-        return float(value)
-    except ValueError:
-        print(f'Incorrect value - {value}')
-    return None
-
-
 if __name__ == '__main__':
     a = Point('6', 10)
-    b = Point(12, 20)
+    b = Point('svv', 20)
     exmpl = Line(a, b)
     print(exmpl.find_middle_point())
     print(exmpl.find_length())

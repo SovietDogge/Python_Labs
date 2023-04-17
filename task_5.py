@@ -4,7 +4,7 @@
 # ex 1
 from sympy import symbols
 
-from task_7 import validate
+from utils import validate
 
 
 EPS = 10 ** -4
