@@ -1,4 +1,5 @@
 import sqlite3 as sq
+import re as r
 
 
 NUM_CHECK_PAIRED = 'num_characteristic.txt'
@@ -18,32 +19,25 @@ def task_1():
 def task_2():
     try:
         num = int(input())
-        if num % 2 == 0:
-            with open(NUM_CHECK_PAIRED, 'wt') as check_paired_file:
-                check_paired_file.write(f'Num {num} is paired')
-        else:
-            with open(NUM_CHECK_PAIRED, 'wt') as check_paired_file:
-                check_paired_file.write(f'Num {num} is not paired')
+        with open(NUM_CHECK_PAIRED, 'wt') as check_paired_file:
+            num_status = f'Num {num} is paired' if num % 2 == 0 else f'Num {num} is not paired'
+            check_paired_file.write(num_status)
 
     except ValueError:
         print('It must be a number')
 
 
 def task_3():
-    python_features = []
     with open('learning_python.txt', 'rt') as file:
-        for line in file:
-            python_features.append(line)
-    print(python_features)
+        python_features = [line for line in file]
+        print(python_features)
 
 
 def task_4():
     python_features = []
     with open('learning_python.txt', 'rt') as file:
-        for line in file:
-            line = line.replace('Python', 'C++')
-            python_features.append(line)
-    print(python_features)
+        python_features = [line.replace('Python', 'C++') for line in file]
+        print(python_features)
 
 
 def task_5():
@@ -58,30 +52,19 @@ def task_5():
 
 def task_6():
     with open('book_1.txt', 'rt') as book:
-        data = book.read()
-        data = data.lower()
-        print(data.count('the'))
+        print(book.read().lower().count('the'))
 
 
 def task_7():
     with open('70321-0.txt', 'rt') as book:
-        formatted_book = book.read()
-        formatted_book = formatted_book.replace('\n', ' ')
+        formatted_book = book.read().replace('\n', ' ')
         with open('formatted_text.txt', 'wt') as file:
             file.write(formatted_book)
 
 
 def task_8():
-    chapters = []
     with open('521-0.txt', 'rt', encoding='UTF-8') as book:
-        for line in book:
-            if 'CHAPTER' in line:
-                chapters.append(line)
-
-    for chapter in chapters:
-        for string in chapters:
-            if chapter[chapter.find('—') + 1:] in string and chapter != string:
-                chapters.remove(string)
+        chapters = [line for line in book if r.match(r'CHAPTER ', line)]
 
     with open('chapters.txt', 'wt', encoding='UTF-8') as file:
         for elem in chapters:
@@ -137,4 +120,5 @@ def task_10():
         print(films)
 
 
-task_10()
+if __name__ == '__main__':
+    task_8()
