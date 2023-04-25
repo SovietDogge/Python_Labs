@@ -202,7 +202,7 @@ def task_12():
 
     if user_choice == bot_choice:
         return 'draw'
-    elif victory_condition[user_choice] == bot_choice:
+    if victory_condition[user_choice] == bot_choice:
         return 'Victory'
     return 'Defeat'
 

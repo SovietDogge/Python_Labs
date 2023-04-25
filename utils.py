@@ -14,27 +14,24 @@ def operation_validation(oper):
     possible_operations = ['+', '-', '/', '*', 'mod', 'pow', 'div']
     if oper in possible_operations:
         return oper
-    else:
-        print('Write correct operation')
-        return operation_validation(input())
+    print('Write correct operation')
+    return operation_validation(input())
 
 
 def banknote_validation(value):
     possible_values = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
     if value in possible_values:
         return value
-    else:
-        print(INCORRECT_INPUT_ER)
-        return banknote_validation(int(input()))
+    print(INCORRECT_INPUT_ER)
+    return banknote_validation(int(input()))
 
 
 def hor_coord_validation(coordinate):
     possible_coordinates = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     if coordinate in possible_coordinates:
         return coordinate
-    else:
-        print(INCORRECT_INPUT_ER)
-        return hor_coord_validation(input('Please enter another letter: '))
+    print(INCORRECT_INPUT_ER)
+    return hor_coord_validation(input('Please enter another letter: '))
 
 
 def vert_coord_validation(coordinate):
@@ -42,9 +39,8 @@ def vert_coord_validation(coordinate):
         coordinate = int(coordinate)
         if 0 < coordinate <= 8:
             return coordinate
-        else:
-            print(INCORRECT_INPUT_ER)
-            return vert_coord_validation(int(input(ENTER_CORRECT_NUM)))
+        print(INCORRECT_INPUT_ER)
+        return vert_coord_validation(int(input(ENTER_CORRECT_NUM)))
     except ValueError:
         return vert_coord_validation(int(input(ENTER_CORRECT_NUM)))
 
@@ -53,6 +49,5 @@ def game_input_validation(value):
     possible_variants = ['rock', 'paper', 'scissors']
     if value in possible_variants:
         return value
-    else:
-        print(INCORRECT_INPUT_ER)
-        return game_input_validation(input('Please, enter rock, paper or scissors '))
+    print(INCORRECT_INPUT_ER)
+    return game_input_validation(input('Please, enter rock, paper or scissors '))
