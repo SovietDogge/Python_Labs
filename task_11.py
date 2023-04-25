@@ -1,14 +1,15 @@
-import  re
+import re
 
 
-RANDOM_TEXT = 'dates.txt'
-
-def write_correct_dates(file):
+def write_correct_dates(path):
     current_date = '25.04.2023'
-    with open(file, 'r') as text:
-        text =
+    with open(path, 'rt', encoding='utf-8') as file:
+        text = re.sub('\d{2}\.\d{2}\.\d{4}',current_date, file.read())
 
+    with open('updated.txt', 'wt') as file:
+        file.write(text)
 
 
 if __name__ == '__main__':
-    write_correct_dates(RANDOM_TEXT)
+    file_path = 'dates.txt'
+    write_correct_dates(file_path)
