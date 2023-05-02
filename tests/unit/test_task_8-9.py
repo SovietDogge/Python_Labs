@@ -53,3 +53,9 @@ def test_validate_string_fail():
     with pytest.raises(Exception):
         user_input = validate_string(user_input)
 
+
+# should add validation to recursive output
+@pytest.mark.parametrize('input_value, expected_value', [(20, 20)])
+def test_banknote_validation(input_value, expected_value):
+    input_value = banknote_validation(input_value)
+    assert input_value == expected_value
