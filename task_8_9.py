@@ -1,6 +1,7 @@
 import random
 
-from utils import *
+from utils import nums_validation, operation_validation, banknote_validation,\
+    hor_coord_validation, vert_coord_validation, game_input_validation, validate_string
 
 EMPTY_USERS_WARNING = 'We need to add some users!!!'
 
@@ -28,7 +29,7 @@ def task_1():
 
 
 def task_2(sides_count):
-    nums_validation(sides_count)
+    sides_count = nums_validation(sides_count)
     for i in range(3, 7):
         if i == sides_count:
             return f'It is a {i}-angle!'
@@ -46,37 +47,34 @@ def task_3():
             print(f'{num}-th')
 
 
-def task_4():
-    num = nums_validation(input())
+def task_4(user_input_year):
+    num = nums_validation(user_input_year)
     if num % 2 == 0.:
-        print(f'{num} is paired')
-    else:
-        print(f'{num} is not paired')
+        return f'{num} is paired'
+    return f'{num} is not paired'
 
 
 def task_6(year):
-    nums_validation(year)
+    year = nums_validation(year)
     if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
         return 'Leap year'
     return 'Ordinary year'
 
 
 def task_5(users_month):
-    validate_string(users_month)
+    users_month = validate_string(users_month)
     month_30_day = ['April', 'June', 'September', 'November']
     month_31_day = ['January', 'March', 'May', 'July', 'August', 'October', 'December']
 
     if users_month in month_30_day:
-        print(f'{users_month} has 30')
-    elif users_month in month_31_day:
-        print(f'{users_month} has 31')
-    else:
-        year = nums_validation(input('Enter year: '))
-        year_type = task_6(year)
-        if year_type == 'Leap year':
-            print(f'{users_month} has 29 in a leap year')
-        else:
-            print(f'{users_month} has 28 in an ordinary year')
+        return f'{users_month} has 30'
+    if users_month in month_31_day:
+        return f'{users_month} has 31'
+    year = nums_validation(input('Enter year: '))
+    year_type = task_6(year)
+    if year_type == 'Leap year':
+        return f'{users_month} has 29 in a leap year'
+    return f'{users_month} has 28 in an ordinary year'
 
 
 def task_7():
@@ -86,29 +84,29 @@ def task_7():
         if num == 0:
             break
         summary += num
-    print(summary)
+    return summary
 
 
 def make_calculations(number1, number2, oper):
     if oper == '+':
         return number1 + number2
-    elif oper == '-':
+    if oper == '-':
         return number1 - number2
-    elif oper == '/':
+    if oper == '/':
         try:
             return number1 / number2
         except ZeroDivisionError:
             raise Exception('You can\'t divide by zero')
-    elif oper == '*':
+    if oper == '*':
         return number1 * number2
-    elif oper == 'mod':
+    if oper == 'mod':
         return number1 % number2
-    elif oper == 'div':
+    if oper == 'div':
         try:
             return number1 // number2
         except ZeroDivisionError:
             raise Exception('You can\'t divide by zero')
-    elif oper == 'pow':
+    if oper == 'pow':
         return number1 ** number2
 
 
@@ -116,7 +114,7 @@ def task_8():
     num1 = nums_validation(input('Enter first num '))
     num2 = nums_validation(input('Enter second num '))
     operation = operation_validation(input('Enter operation '))
-    print(f'Result = {make_calculations(num1, num2, operation)}')
+    return f'Result = {make_calculations(num1, num2, operation)}'
 
 
 def find_banknote_info(value):
@@ -130,7 +128,7 @@ def find_banknote_info(value):
 def task_9():
     banknote_value = banknote_validation(int(input('Enter a banknote value ')))
     result = find_banknote_info(banknote_value)
-    print(f'Value {result[1]} is {result[0]}')
+    return f'Value {result[1]} is {result[0]}'
 
 
 def define_color(horizon_cor, vertical_cor):
@@ -138,15 +136,14 @@ def define_color(horizon_cor, vertical_cor):
         return 'black'
     elif horizon_cor in 'bdfh' and vertical_cor % 2 == 0:
         return 'black'
-    else:
-        return 'white'
+    return 'white'
 
 
 def task_10():
     hor_coord = hor_coord_validation(input('Enter horizontal coordinate '))
     vert_coord = vert_coord_validation(input('Enter vertical coordinate '))
     result = define_color(hor_coord, vert_coord)
-    print(f'field is {result}')
+    return f'field is {result}'
 
 
 def convert_to_binary(number):
@@ -175,12 +172,13 @@ def task_11():
     num = nums_validation(input('Enter any num '))
     binary_num = convert_to_binary(num)
     decimal_num = convert_to_decimal(binary_num)
-    print(f'Number {num} in binary = {binary_num}, in Decimal = {decimal_num}')
+    return f'Number {num} in binary = {binary_num}, in Decimal = {decimal_num}'
 
 
 def task_12():
     user_choice = game_input_validation(input('Enter rock, paper or scissors '))
     possible_variants = ['rock', 'paper', 'scissors']
+
     bot_choice = random.sample(possible_variants, 1)[0]
     victory_condition = {'rock': 'scissors', 'scissors': 'paper', 'paper': 'rock'}
     print(f'Bot choose {bot_choice}')
@@ -193,4 +191,4 @@ def task_12():
 
 
 if __name__ == '__main__':
-    task_1()
+    print(convert_to_decimal('101101'))
