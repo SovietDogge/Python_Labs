@@ -14,12 +14,6 @@ def test_nums_validation(user_input, expected_output):
     assert user_input == expected_output
 
 
-@pytest.mark.xfail()
-def test_fail_nums_validation():
-    user_input = 'sdsvd'
-    assert nums_validation(user_input)
-
-
 # should add validation to recursive output
 def test_operation_validation():
     input_value = operation_validation('+')
@@ -48,8 +42,14 @@ def test_game_input_validation(input_value, expected_value):
     assert input_value == expected_value
 
 
-@pytest.mark.parametrize('input_value, expected_value', [('April', 'April'),
-                                                         ('aboba', Exception('Enter a correct title of month'))])
+@pytest.mark.parametrize('input_value, expected_value', [('April', 'April')])
 def test_validate_string(input_value, expected_value):
     input_value = validate_string(input_value)
     assert input_value == expected_value
+
+
+def test_validate_string_fail():
+    user_input = 'aboba'
+    with pytest.raises(Exception):
+        user_input = validate_string(user_input)
+

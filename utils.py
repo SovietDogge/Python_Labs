@@ -58,5 +58,5 @@ def validate_string(value):
               'January', 'March', 'May', 'July', 'August',
               'October', 'December', 'February']
     if value not in months:
-        return Exception('Enter a correct title of month')
+        raise Exception('Enter a correct title of month')
     return value
