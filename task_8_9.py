@@ -5,21 +5,6 @@ from utils import *
 EMPTY_USERS_WARNING = 'We need to add some users!!!'
 
 
-def validate_num(value):
-    try:
-        return float(value)
-    except ValueError:
-        raise Exception(f'Incorrect value - {value}')
-
-
-def validate_string(value):
-    months = ['April', 'June', 'September', 'November',
-              'January', 'March', 'May', 'July', 'August',
-              'October', 'December', 'February']
-    if value not in months:
-        raise Exception('Enter a correct title of month')
-
-
 def print_greeting(name):
     if name == 'Admin':
         return 'Admin, I hope you are well'
@@ -43,7 +28,7 @@ def task_1():
 
 
 def task_2(sides_count):
-    validate_num(sides_count)
+    nums_validation(sides_count)
     for i in range(3, 7):
         if i == sides_count:
             return f'It is a {i}-angle!'
@@ -62,7 +47,7 @@ def task_3():
 
 
 def task_4():
-    num = validate_num(input())
+    num = nums_validation(input())
     if num % 2 == 0.:
         print(f'{num} is paired')
     else:
@@ -70,7 +55,7 @@ def task_4():
 
 
 def task_6(year):
-    validate_num(year)
+    nums_validation(year)
     if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
         return 'Leap year'
     return 'Ordinary year'
@@ -86,7 +71,7 @@ def task_5(users_month):
     elif users_month in month_31_day:
         print(f'{users_month} has 31')
     else:
-        year = validate_num(input('Enter year: '))
+        year = nums_validation(input('Enter year: '))
         year_type = task_6(year)
         if year_type == 'Leap year':
             print(f'{users_month} has 29 in a leap year')
@@ -208,5 +193,4 @@ def task_12():
 
 
 if __name__ == '__main__':
-    while True:
-        print(task_12())
+    task_1()
