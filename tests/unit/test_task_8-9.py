@@ -14,7 +14,7 @@ from utils import nums_validation, operation_validation, banknote_validation, \
 def test_nums_validation(user_input, expected_output):
     user_input = nums_validation(user_input)
     assert user_input == expected_output
-
+#замокать инпут
 
 # should add validation to recursive output
 def test_operation_validation():

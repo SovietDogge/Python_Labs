@@ -53,10 +53,7 @@ def game_input_validation(value):
     return game_input_validation(input('Please, enter rock, paper or scissors '))
 
 
-def validate_string(value):
-    months = ['April', 'June', 'September', 'November',
-              'January', 'March', 'May', 'July', 'August',
-              'October', 'December', 'February']
-    if value not in months:
+def validate_string(value, valid_months):
+    if value not in valid_months:
         raise Exception('Enter a correct title of month')
     return value

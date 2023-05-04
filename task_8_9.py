@@ -61,20 +61,18 @@ def task_6(year):
     return 'Ordinary year'
 
 
-def task_5(users_month):
-    users_month = validate_string(users_month)
-    month_30_day = ['April', 'June', 'September', 'November']
-    month_31_day = ['January', 'March', 'May', 'July', 'August', 'October', 'December']
-
-    if users_month in month_30_day:
-        return f'{users_month} has 30'
-    if users_month in month_31_day:
-        return f'{users_month} has 31'
+def define_nom_of_days():
     year = nums_validation(input('Enter year: '))
     year_type = task_6(year)
-    if year_type == 'Leap year':
-        return f'{users_month} has 29 in a leap year'
-    return f'{users_month} has 28 in an ordinary year'
+    return 29 if year_type == 'Leap' else 28
+
+
+def task_5(users_month):
+    # словарь использовать
+    months = {'February': define_nom_of_days()}
+    users_month = validate_string(users_month, months.keys())
+    return months[users_month]
+
 
 
 def task_7():
@@ -174,7 +172,7 @@ def task_11():
     decimal_num = convert_to_decimal(binary_num)
     return f'Number {num} in binary = {binary_num}, in Decimal = {decimal_num}'
 
-
+#посмотреть как работать с сид
 def task_12():
     user_choice = game_input_validation(input('Enter rock, paper or scissors '))
     possible_variants = ['rock', 'paper', 'scissors']
@@ -185,10 +183,11 @@ def task_12():
 
     if user_choice == bot_choice:
         return 'draw'
+    # сделать через тернарный оператор
     if victory_condition[user_choice] == bot_choice:
         return 'Victory'
     return 'Defeat'
 
 
 if __name__ == '__main__':
-    print(convert_to_decimal('101101'))
+    task_2(23233)
