@@ -72,7 +72,7 @@ def test_print_greeting(input_value, expected_value):
 
 @pytest.mark.parametrize('input_value, expected_value', [(4, 'It is a 4-angle!'),
                                                          (12, '12 isn\'t a correct value')])
-@patch('utils.nums_validation')
+@patch('task_8_9.nums_validation')
 def test_task_2(mock_validation, input_value, expected_value):
     mock_validation.return_value = input_value
     actual = task_2(input_value)
@@ -123,7 +123,7 @@ def test_make_calculations(input_value, expected_value):
 @pytest.mark.parametrize('input_value', [(2, 0, '/'), (5, 0, 'div')])
 def test_fail_make_calculations(input_value):
     with pytest.raises(Exception):
-        input_value = make_calculations(input_value[0], input_value[1], input_value[2])
+        make_calculations(input_value[0], input_value[1], input_value[2])
 
 
 @pytest.mark.parametrize('input_value, expected_output', [(('a', 4), 'white'), (('a', 5), 'black'),
@@ -142,6 +142,14 @@ def test_convert_to_binary():
 
 def test_convert_to_decimal():
     user_input = '101101'
-    actual = convert_to_decimal('101101')
+    actual = convert_to_decimal(user_input)
     expected_output = 45
     assert actual == expected_output
+
+
+@patch('task_8_9.nums_validation', side_effect=[10, 0])
+@patch('task_8_9.input')
+def test_task_7(v_mock, i_mock):
+    actual = task_7()
+    expected = 10
+    assert actual == expected

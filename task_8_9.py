@@ -74,7 +74,6 @@ def task_5(users_month):
     return months[users_month]
 
 
-
 def task_7():
     summary = 0
     while True:
@@ -124,7 +123,7 @@ def find_banknote_info(value):
 
 
 def task_9():
-    banknote_value = banknote_validation(int(input('Enter a banknote value ')))
+    banknote_value = banknote_validation()
     result = find_banknote_info(banknote_value)
     return f'Value {result[1]} is {result[0]}'
 

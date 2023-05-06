@@ -18,12 +18,13 @@ def operation_validation(oper):
     return operation_validation(input())
 
 
-def banknote_validation(value):
+def banknote_validation():
+    value = int(input('Enter a banknote value '))
     possible_values = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
     if value in possible_values:
         return value
     print(INCORRECT_INPUT_ER)
-    return banknote_validation(int(input()))
+    return banknote_validation()
 
 
 def hor_coord_validation(coordinate):
