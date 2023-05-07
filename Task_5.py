@@ -3,7 +3,6 @@
 from sympy import *
 
 EPS = 10 ** -4
-LIMIT_RECURSION = 100
 
 
 def find_sum():
@@ -17,7 +16,7 @@ def find_sum():
         amount += exercise.subs('n', n_copy)
         n_copy += 1
 
-    print(f'Sum = {float(amount)}')
+    return f'Sum = {round(float(amount), 4)}'
 
 
 def find_power_10(number):
@@ -32,18 +31,18 @@ def find_power_10(number):
     return count_numerals
 
 
-def find_degree(interested_num, start_num, current_recursion=0):
-    if current_recursion < LIMIT_RECURSION:
-        current_recursion += 1
-        correct_num = (1 / 2) * (start_num + (interested_num / start_num))
-        if correct_num ** 2 == interested_num:
-            return correct_num
-        current_recursion += 1
-        return find_degree(interested_num, correct_num, current_recursion)
-    return 'Limit of recursion achieved'
+def find_degree(interested_num, start_num):
+    eps = pow(10, -4)
+    correct_num = (1 / 2) * (start_num + (interested_num / start_num))
+
+    if abs(start_num - correct_num) < eps * start_num:
+        return round(correct_num, 4)
+
+    return find_degree(interested_num, correct_num)
 
 
 if __name__ == '__main__':
     power_of_num = int(input('Enter number you are interested to find his sqrt: '))
     num = int(input('Enter any num: '))
     print(find_degree(power_of_num, num))
+    # print(find_sum())
