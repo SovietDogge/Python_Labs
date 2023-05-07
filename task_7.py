@@ -4,7 +4,6 @@ from utils import validate
 
 
 class Point:
-
     def __init__(self, x_value, y_value):
         self.__x = validate(x_value)
         self.__y = validate(y_value)
