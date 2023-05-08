@@ -66,12 +66,11 @@ def define_nom_of_days():
 
 
 def task_5(users_month):
-    months = {'February': define_nom_of_days() if users_month == 'February' else '',
-              'January': 31, 'March': 31, 'May': 31, 'July': 31,
+    months = {'January': 31, 'March': 31, 'May': 31, 'July': 31,
               'August': 31, 'October': 31, 'December': 31, 'April': 30, 'June': 30,
               'September': 30, 'November': 30}
     users_month = validation_pattern(users_month, months.keys())
-    return months[users_month]
+    return months[users_month] if users_month != 'February' else define_nom_of_days()
 
 
 def task_7():
