@@ -13,7 +13,7 @@ def task_1():
 
     with open('amount.txt', 'wt') as file:
         file.write(str(amount))
-    print(amount)
+    return amount
 
 
 def task_2():
@@ -24,20 +24,19 @@ def task_2():
             check_paired_file.write(num_status)
 
     except ValueError:
-        print('It must be a number')
+        raise Exception('It must be a number')
 
 
 def task_3():
     with open('learning_python.txt', 'rt') as file:
         python_features = [line for line in file]
-        print(python_features)
+        return python_features
 
 
 def task_4():
-    python_features = []
     with open('learning_python.txt', 'rt') as file:
         python_features = [line.replace('Python', 'C++') for line in file]
-        print(python_features)
+        return python_features
 
 
 def task_5():
@@ -52,7 +51,7 @@ def task_5():
 
 def task_6():
     with open('book_1.txt', 'rt') as book:
-        print(book.read().lower().count('the'))
+        return book.read().lower().count('the')
 
 
 def task_7():
@@ -84,8 +83,8 @@ def task_9():
                     count_lower_letters += 1
 
     count_letters = count_upper_letters + count_lower_letters
-    print(f'Percentage of upper letters is {(count_upper_letters / count_letters) * 100}')
-    print(f'Percentage of lower letters is {(count_lower_letters / count_letters) * 100}')
+    return f'Percentage of upper letters is {(count_upper_letters / count_letters) * 100}\n ' \
+           f'Percentage of lower letters is {(count_lower_letters / count_letters) * 100}'
 
 
 def task_10():
@@ -121,4 +120,4 @@ def task_10():
 
 
 if __name__ == '__main__':
-    task_8()
+    print(task_1())
