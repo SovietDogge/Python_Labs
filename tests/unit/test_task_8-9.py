@@ -110,13 +110,13 @@ def test_task_6(mock_val, input_value, expected_value):
     assert actual == expected_value
 
 
-@pytest.mark.parametrize('expected_value', [29, 28])
+@pytest.mark.parametrize('expected_value, input_year', [(29, (2000, 'Leap')), (28, (2001, 'Ordinary'))])
 @patch('task_8_9.nums_validation')
 @patch('task_8_9.input')
 @patch('task_8_9.task_6')
-def test_define_nom_of_days(mock_t6, mock_in, mock_val, expected_value):
-    mock_val.return_value = 2000 if expected_value == 29 else 2001
-    mock_t6.return_value = 'Leap' if mock_val.return_value == 2000 else 'Ordinary'
+def test_define_nom_of_days(mock_t6, mock_in, mock_val, expected_value, input_year):
+    mock_val.return_value = input_year[0]
+    mock_t6.return_value = input_year[1]
     actual = define_nom_of_days()
     assert actual == expected_value
 
@@ -174,17 +174,12 @@ def test_task_7(v_mock, i_mock):
     assert actual == expected
 
 
-@pytest.mark.parametrize('expected_output', ['Victory', 'Draw', 'Defeat'])
+@pytest.mark.parametrize('expected_output, bot_choice',
+                         [('Victory', 'scissors'), ('Draw', 'rock'), ('Defeat', 'paper')])
 @patch('task_8_9.validation_pattern', return_value='rock')
 @patch('task_8_9.input')
 @patch('task_8_9.random.choice')
-def test_task_12(rd_mock, mock_i, val_mock, expected_output):
-    if expected_output == 'Victory':
-        rd_mock.return_value = 'scissors'
-    elif expected_output == 'Draw':
-        rd_mock.return_value = 'rock'
-    else:
-        rd_mock.return_value = 'paper'
-
+def test_task_12(rd_mock, mock_i, val_mock, expected_output, bot_choice):
+    rd_mock.return_value = bot_choice
     actual = task_12()
     assert actual == expected_output
