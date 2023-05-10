@@ -12,14 +12,14 @@ class Point:
         return f'x = {self.__x}, y = {self.__y}'
 
     def __sub__(self, other):
-        x = self.__x - other.__x
-        y = self.__y - other.__y
-        return Point(x, y)
+        coord_x = self.__x - other.__x
+        coord_y = self.__y - other.__y
+        return Point(coord_x, coord_y)
 
     def __add__(self, other):
-        x = self.__x + other.__x
-        y = self.__y + other.__y
-        return Point(x, y)
+        coord_x = self.__x + other.__x
+        coord_y = self.__y + other.__y
+        return Point(coord_x, coord_y)
 
     @property
     def x(self):
