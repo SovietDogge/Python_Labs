@@ -40,7 +40,7 @@ def task_3(path):
 
 
 if __name__ == '__main__':
-    # task_1('dates.txt')
-    # task_2('some_text.txt')
-    task_3('events.txt')
+    # print(task_1('dates.txt'))
+    print(task_2('some_text.txt'))
+    print(task_3('events.txt'))
     # dates_file_path = 'dates.txt'
