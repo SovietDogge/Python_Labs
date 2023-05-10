@@ -29,7 +29,7 @@ def task_2():
 
 def task_3():
     with open('learning_python.txt', 'rt') as file:
-        python_features = [line for line in file]
+        python_features = [line.rstrip('\n') for line in file]
         return python_features
 
 
@@ -120,4 +120,4 @@ def task_10():
 
 
 if __name__ == '__main__':
-    print(task_1())
+    print(task_3())
