@@ -35,7 +35,7 @@ def task_3():
 
 def task_4():
     with open('learning_python.txt', 'rt') as file:
-        python_features = [line.replace('Python', 'C++') for line in file]
+        python_features = [line.replace('Python', 'C++').rstrip('\n') for line in file]
         return python_features
 
 
@@ -54,15 +54,15 @@ def task_6():
         return book.read().lower().count('the')
 
 
-def task_7():
-    with open('70321-0.txt', 'rt') as book:
+def task_7(path):
+    with open(path, 'rt') as book:
         formatted_book = book.read().replace('\n', ' ')
-        with open('formatted_text.txt', 'wt') as file:
-            file.write(formatted_book)
+    with open('formatted_text.txt', 'wt') as file:
+        file.write(formatted_book)
 
 
-def task_8():
-    with open('521-0.txt', 'rt', encoding='UTF-8') as book:
+def task_8(path):
+    with open(path, 'rt', encoding='UTF-8') as book:
         chapters = [line for line in book if r.match(r'CHAPTER ', line)]
 
     with open('chapters.txt', 'wt', encoding='UTF-8') as file:
@@ -70,10 +70,10 @@ def task_8():
             file.write(elem + '\n')
 
 
-def task_9():
+def task_9(path):
     count_upper_letters = 0
     count_lower_letters = 0
-    with open('1184-0.txt', 'rt', encoding='UTF-8') as book:
+    with open(path, 'rt', encoding='UTF-8') as book:
         text = book.read()
         for letter in text:
             if letter.isalpha():
@@ -83,7 +83,7 @@ def task_9():
                     count_lower_letters += 1
 
     count_letters = count_upper_letters + count_lower_letters
-    return f'Percentage of upper letters is {(count_upper_letters / count_letters) * 100}\n ' \
+    return f'Percentage of upper letters is {(count_upper_letters / count_letters) * 100}\n' \
            f'Percentage of lower letters is {(count_lower_letters / count_letters) * 100}'
 
 
@@ -105,19 +105,17 @@ def task_10():
         cur.execute('SELECT * FROM ratings')
         db_imdb.commit()
         films = cur.fetchall()
-        print(films)
         cur.execute('''SELECT * FROM ratings
                             WHERE rating > 8.7
                             order by title''')
         db_imdb.commit()
-        films = cur.fetchall()
-        print(films)
+        films += cur.fetchall()
         cur.execute('''SELECT * FROM ratings
                                 order by title''')
         db_imdb.commit()
-        films = cur.fetchall()
-        print(films)
+        films += cur.fetchall()
+        return films
 
 
 if __name__ == '__main__':
-    print(task_3())
+    print(task_9('test_t9.txt'))
