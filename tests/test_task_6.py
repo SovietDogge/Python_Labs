@@ -213,3 +213,17 @@ Release Date: January, 1998 [eBook #1184]
                f'Percentage of lower letters is 92.73084479371316'
     assert actual == expected
 
+
+@patch('task_6.open')
+def test_task_10(mock_op):
+    mock_op = mock_open(mock_op, read_data='''The Shawshank Redemption, 1994, 9.2
+The Godfather, 1972, 9.2
+The Dark Knight, 2008, 9.0
+V for Vendetta, 2005, 8.2
+The Big Lebowski, 1998, 8.1
+Ratatouille, 2007, 8.0
+''')
+    expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2), (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2), (5, 'The Big Lebowski', 1998, 8.1), (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0), (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
+    print(len(expected))
+    actual = task_10()
+    assert actual == expected

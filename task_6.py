@@ -99,7 +99,7 @@ def task_10():
         with open('imdb.csv', 'r') as file:
             for line in file:
                 print(line.split(', '))
-                line = line.strip()
+                line = line.strip().rstrip('\n')
                 cur.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)', line.split(', '))
                 db_imdb.commit()
         cur.execute('SELECT * FROM ratings')
@@ -118,4 +118,4 @@ def task_10():
 
 
 if __name__ == '__main__':
-    print(task_9('test_t9.txt'))
+    print(task_10())
