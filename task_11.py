@@ -1,15 +1,6 @@
 import re
 
 
-def write_correct_dates(path):
-    current_date = '25.04.2023'
-    with open(path, 'rt', encoding='utf-8') as file:
-        text = re.sub(r'\d{2}\.\d{2}\.\d{4}', current_date, file.read())
-
-    with open('updated.txt', 'wt') as file:
-        file.write(text)
-
-
 def task_1(path):
     with open(path, 'rt', encoding='utf-8') as file:
         text = file.read()
@@ -29,11 +20,27 @@ def task_1(path):
 
         dates[i] = '.'.join(correct_date)
 
-    print(dates)
+    return dates
+
+
+def task_2(path):
+    with open(path, 'rt', encoding='utf-8') as file:
+        text = file.read()
+        sentences = re.findall(r'[A-Z][^\.!?]*[\.!?]', text)
+        return sentences
+
+
+def task_3(path):
+    with open(path, 'rt', encoding='utf-8') as file:
+        text = file.read()
+        descriptions = re.findall(r'[A-Z][^\.!?]*[\.!?]', text)
+        dates = re.findall(r'\d{3,4}', text)
+        events = dict(zip(dates, descriptions))
+        return events
 
 
 if __name__ == '__main__':
-    task_1('dates.txt')
+    # task_1('dates.txt')
+    # task_2('some_text.txt')
+    task_3('events.txt')
     # dates_file_path = 'dates.txt'
-    # write_correct_dates(dates_file_path)
-
