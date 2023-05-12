@@ -60,6 +60,13 @@ class MyMultiSet:
     def intersection(self, set_to_intersect):
         new_set = {}
         for key in self.__count_nums.keys():
-            if key in set_to_intersect.count_nums:
+            if key in set_to_intersect.count_nums.keys():
                 if self.__count_nums[key] > set_to_intersect.count_nums[key]:
                     new_set[key] = set_to_intersect.count_nums[key]
+                else:
+                    new_set[key] =  self.__count_nums[key]
+
+        new_multiset = MyMultiSet()
+        new_multiset.count_nums = new_set
+        return new_multiset
+
