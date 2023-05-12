@@ -44,8 +44,7 @@ class MyMultiSet:
         return True
 
     def union(self, set_to_unite):
-        new_multiset = MyMultiSet
-        new_multiset.count_nums(deepcopy(self.__count_nums))
+        new_set = deepcopy(set_to_unite)
         for key, value in set_to_unite.count_nums.items():
 
             if key in new_set.keys():
@@ -53,7 +52,14 @@ class MyMultiSet:
                     new_set[key] = value
             else:
                 new_set[key] = value
-        return new_set
+
+        new_multiset = MyMultiSet()
+        new_multiset.count_nums = new_set
+        return new_multiset
 
     def intersection(self, set_to_intersect):
-
+        new_set = {}
+        for key in self.__count_nums.keys():
+            if key in set_to_intersect.count_nums:
+                if self.__count_nums[key] > set_to_intersect.count_nums[key]:
+                    new_set[key] = set_to_intersect.count_nums[key]

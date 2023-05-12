@@ -12,4 +12,4 @@ if __name__ == '__main__':
     tmp.add_num(3)
     tmp.add_num(2)
     tmp.add_num(4)
-    new_exmpl = exm.union(tmp)
+    new_exmpl = exm.intersection(tmp)
