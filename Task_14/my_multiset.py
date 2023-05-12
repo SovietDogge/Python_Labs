@@ -21,6 +21,13 @@ class MyMultiSet:
             return self.__count_nums[number]
         return None
 
+    @property
+    def count_nums(self):
+        return self.__count_nums
+
+    @property.setter
+    def co
+
     def remove(self, number):
         if number in self.__count_nums.keys():
             if self.__count_nums[number]:
@@ -37,7 +44,7 @@ class MyMultiSet:
 
     def union(self, set_to_unite):
         new_set = deepcopy(self.__count_nums)
-        for key, value in set_to_unite.__count_nums:
+        for key, value in set_to_unite.count_nums.items():
 
             if key in new_set.keys():
                 if value > new_set[key]:
@@ -45,3 +52,6 @@ class MyMultiSet:
             else:
                 new_set[key] = value
         return new_set
+
+    def intersection(self, set_to_intersect):
+
