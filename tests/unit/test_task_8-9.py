@@ -23,12 +23,11 @@ def test_nums_validation(mock_v, mock_i, user_input, expected_output):
     assert actual == expected_output
 
 
-@pytest.mark.parametrize('input_value, expected_value, possible_value', [(1, 1, POSSIBLE_BANKNOTES.keys()),
-                                                                         (21, 20, POSSIBLE_BANKNOTES.keys()),
-                                                                         ])
+@pytest.mark.parametrize('input_value, expected_value', [(1, 1), (21, 20)])
 @patch('validations.validation_pattern', return_value=20)
 @patch('validations.input')
-def test_validation_pattern_banknotes(mock_v, mock_i, input_value, expected_value, possible_value):
+def test_validation_pattern_banknotes(mock_v, mock_i, input_value, expected_value):
+    possible_value = POSSIBLE_BANKNOTES.keys()
     actual = validation_pattern(input_value, possible_value)
     assert actual == expected_value
 

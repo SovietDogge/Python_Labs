@@ -23,6 +23,6 @@ def vert_coord_validation(coordinate):
         if 0 < coordinate <= 8:
             return coordinate
         print(INCORRECT_INPUT_ER)
-        return vert_coord_validation(int(input(ENTER_CORRECT_NUM)))
+        return vert_coord_validation(input(ENTER_CORRECT_NUM))
     except ValueError:
-        return vert_coord_validation(int(input(ENTER_CORRECT_NUM)))
+        return vert_coord_validation(input(ENTER_CORRECT_NUM))

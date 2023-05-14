@@ -35,7 +35,7 @@ def task_2(sides_count):
 
 
 def task_3():
-    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    nums = [i for i in range(1, 10)]
     for num in nums:
         if num == 1:
             print(f'{num}-st')
@@ -47,16 +47,12 @@ def task_3():
 
 def task_4(user_input_year):
     num = nums_validation(user_input_year)
-    if num % 2 == 0.:
-        return f'{num} is paired'
-    return f'{num} is not paired'
+    return f'{num} is paired' if num % 2 == 0 else f'{num} is not paired'
 
 
 def task_6(year):
     year = nums_validation(year)
-    if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
-        return 'Leap'
-    return 'Ordinary'
+    return 'Leap' if year % 4 == 0 and year % 100 != 0 or year % 400 == 0 else 'Ordinary'
 
 
 def define_nom_of_days():
@@ -78,31 +74,30 @@ def task_7():
     while True:
         num = nums_validation(input())
         if num == 0:
-            break
+            return summary
         summary += num
-    return summary
 
 
 def make_calculations(number1, number2, oper):
     if oper == '+':
         return number1 + number2
-    if oper == '-':
+    elif oper == '-':
         return number1 - number2
-    if oper == '/':
+    elif oper == '/':
         try:
             return number1 / number2
         except ZeroDivisionError:
             raise Exception('You can\'t divide by zero')
-    if oper == '*':
+    elif oper == '*':
         return number1 * number2
-    if oper == 'mod':
+    elif oper == 'mod':
         return number1 % number2
-    if oper == 'div':
+    elif oper == 'div':
         try:
             return number1 // number2
         except ZeroDivisionError:
             raise Exception('You can\'t divide by zero')
-    if oper == 'pow':
+    elif oper == 'pow':
         return number1 ** number2
 
 
@@ -170,8 +165,7 @@ def task_12():
 
     if user_choice == bot_choice:
         return 'Draw'
-    result = 'Victory' if victory_condition[user_choice] == bot_choice else 'Defeat'
-    return result
+    return 'Victory' if victory_condition[user_choice] == bot_choice else 'Defeat'
 
 
 if __name__ == '__main__':
