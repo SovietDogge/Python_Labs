@@ -6,10 +6,8 @@ NUM_CHECK_PAIRED = 'num_characteristic.txt'
 
 
 def task_1():
-    amount = 0
     with open('numbers.txt', 'rt') as nums:
-        for num in nums:
-            amount += int(num)
+        amount = sum([float(num) for num in nums])
 
     with open('amount.txt', 'wt') as file:
         file.write(str(amount))
@@ -18,11 +16,10 @@ def task_1():
 
 def task_2():
     try:
-        num = int(input())
+        num = int(input('Enter any number: '))
         with open(NUM_CHECK_PAIRED, 'wt') as check_paired_file:
             num_status = f'Num {num} is paired' if num % 2 == 0 else f'Num {num} is not paired'
             check_paired_file.write(num_status)
-
     except ValueError:
         raise Exception('It must be a number')
 

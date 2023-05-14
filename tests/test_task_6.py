@@ -40,15 +40,14 @@ def test_task_1():
 
 
 @patch('task_6.input')
-@pytest.mark.parametrize('user_input, expected_output',
-                         [(22, [call('num_characteristic.txt', 'wt'), call().__enter__(),
-                                call().write('Num 22 is paired'), call().__exit__(None, None, None)])])
-def test_task_2(mock_in, user_input, expected_output):
+def test_task_2(mock_in):
+    user_input = 22
+    expected_output = [call('num_characteristic.txt', 'wt'), call().__enter__(),
+                       call().write('Num 22 is paired'), call().__exit__(None, None, None)]
     mock_op = mock_open()
     with patch('task_6.open', mock_op):
         mock_in.return_value = user_input
         task_2()
-
         assert mock_op.mock_calls == expected_output
 
 
@@ -223,7 +222,12 @@ V for Vendetta, 2005, 8.2
 The Big Lebowski, 1998, 8.1
 Ratatouille, 2007, 8.0
 ''')
-    expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2), (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2), (5, 'The Big Lebowski', 1998, 8.1), (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0), (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
+    expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2),
+                (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2), (5, 'The Big Lebowski', 1998, 8.1),
+                (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
+                (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0),
+                (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
+                (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
     print(len(expected))
     actual = task_10()
     assert actual == expected
