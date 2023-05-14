@@ -5,6 +5,5 @@ from Task_14.my_multiset import MyMultiSet
 
 def test_clear():
     input_value = MyMultiSet()
-    input_value.add_num(3)
-
-    expected_value = in
+    expected_value = {'_MyMultiSet__count_nums': {}}
+    assert input_value.__dict__ == expected_value

@@ -15,4 +15,5 @@ if __name__ == '__main__':
     tmp.add_num(1)
     tmp.add_num(1)
     new_exmpl = exm.intersection(tmp)
-    # print(exm.__dict__)
+    emtyset = MyMultiSet()
+    print(emtyset.__dict__)
