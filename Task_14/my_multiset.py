@@ -3,8 +3,10 @@ from copy import deepcopy
 
 class MyMultiSet:
 
-    def __init__(self):
-        self.__count_nums = {}
+    def __init__(self, start_dict=None):
+        if start_dict is None:
+            start_dict = {}
+        self.__count_nums = start_dict
 
     def clear(self):
         self.__count_nums = {}
@@ -53,8 +55,7 @@ class MyMultiSet:
             else:
                 new_set[key] = value
 
-        new_multiset = MyMultiSet()
-        new_multiset.count_nums = new_set
+        new_multiset = MyMultiSet(new_set)
         return new_multiset
 
     def intersection(self, set_to_intersect):
@@ -66,6 +67,5 @@ class MyMultiSet:
                 else:
                     new_set[key] = self.__count_nums[key]
 
-        new_multiset = MyMultiSet()
-        new_multiset.count_nums = new_set
+        new_multiset = MyMultiSet(new_set)
         return new_multiset
