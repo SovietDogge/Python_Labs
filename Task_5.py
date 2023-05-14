@@ -1,6 +1,6 @@
 # Multiparadigm programming languages, Task 5
 # Vanda Nikita Denisovich
-from sympy import *
+from sympy import symbols
 
 EPS = 10 ** -4
 
@@ -32,17 +32,16 @@ def find_power_10(number):
 
 
 def find_degree(interested_num, start_num):
-    eps = pow(10, -4)
     correct_num = (1 / 2) * (start_num + (interested_num / start_num))
 
-    if abs(start_num - correct_num) < eps * start_num:
+    if abs(start_num - correct_num) < EPS * start_num:
         return round(correct_num, 4)
 
     return find_degree(interested_num, correct_num)
 
 
 if __name__ == '__main__':
-    power_of_num = int(input('Enter number you are interested to find his sqrt: '))
-    num = int(input('Enter any num: '))
-    print(find_degree(power_of_num, num))
-    # print(find_sum())
+    # power_of_num = int(input('Enter number you are interested to find his sqrt: '))
+    # num = int(input('Enter any num: '))
+    # print(find_degree(power_of_num, num))
+    print(find_sum())
