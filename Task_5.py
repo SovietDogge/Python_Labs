@@ -5,6 +5,14 @@ from sympy import symbols
 EPS = 10 ** -4
 
 
+def nums_validation(num):
+    try:
+        return int(num)
+    except ValueError:
+        print('Incorrect input')
+        return nums_validation(input())
+
+
 def find_sum():
     amount = 0
     n = symbols('n')
@@ -41,7 +49,7 @@ def find_degree(interested_num, start_num):
 
 
 if __name__ == '__main__':
-    # power_of_num = int(input('Enter number you are interested to find his sqrt: '))
-    # num = int(input('Enter any num: '))
-    # print(find_degree(power_of_num, num))
+    power_of_num = nums_validation(input('Enter number you are interested to find his sqrt: '))
+    num = nums_validation(input('Enter any num: '))
+    print(find_degree(power_of_num, num))
     print(find_sum())
