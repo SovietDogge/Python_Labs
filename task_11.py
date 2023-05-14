@@ -13,7 +13,7 @@ def task_1(path):
         correct_date = date.split('.')
         for j, num in enumerate(correct_date):
             if len(num) < 2:
-                correct_date[j] = f'0{correct_date[j]}'
+                correct_date[j] = correct_date[j].zfill(2)
 
         if len(correct_date[0]) > len(correct_date[-1]):
             correct_date[0], correct_date[-1] = correct_date[-1], correct_date[0]
@@ -25,9 +25,7 @@ def task_1(path):
 
 def task_2(path):
     with open(path, 'rt', encoding='utf-8') as file:
-        text = file.read()
-        sentences = re.findall(r'[A-Z][^\.!?]*[\.!?]', text)
-        return sentences
+        return re.findall(r'[A-Z][^\.!?]*[\.!?]', file.read())
 
 
 def task_3(path):
@@ -40,7 +38,7 @@ def task_3(path):
 
 
 if __name__ == '__main__':
-    # print(task_1('dates.txt'))
-    print(task_2('some_text.txt'))
-    print(task_3('events.txt'))
+    print(task_1('dates.txt'))
+    # print(task_2('some_text.txt'))
+    # print(task_3('events.txt'))
     # dates_file_path = 'dates.txt'
