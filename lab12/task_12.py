@@ -56,7 +56,6 @@ class MainApp(MDApp):
             self.root.ids.score.text = 'It\'s a tie!'
 
     def win(self):
-
         if self.root.ids.btn1.text != '' and self.root.ids.btn1.text == self.root.ids.btn2.text and \
                 self.root.ids.btn2.text == self.root.ids.btn3.text:
             self.end_game(self.root.ids.btn1, self.root.ids.btn2, self.root.ids.btn3)
@@ -107,6 +106,13 @@ class MainApp(MDApp):
 
     def restart(self):
         self.turn = 'X'
+        # buttons = [self.root.ids.btn1, self.root.ids.btn2, self.root.ids.btn3, self.root.ids.btn4,
+        #            self.root.ids.btn5, self.root.ids.btn6,
+        #            self.root.ids.btn7, self.root.ids.btn8, self.root.ids.btn9]
+        # for i in enumerate(buttons):
+        #     buttons[i].disabled = False
+        #     buttons[i].text = ''
+        #     buttons[i].color = 'blue'
         self.root.ids.btn1.disabled = False
         self.root.ids.btn2.disabled = False
         self.root.ids.btn3.disabled = False
