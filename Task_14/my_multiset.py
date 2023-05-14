@@ -46,8 +46,8 @@ class MyMultiSet:
         return True
 
     def union(self, set_to_unite):
-        new_set = deepcopy(set_to_unite)
-        for key, value in set_to_unite.count_nums.items():
+        new_set = deepcopy(set_to_unite.count_nums)
+        for key, value in self.count_nums.items():
 
             if key in new_set.keys():
                 if value > new_set[key]:
