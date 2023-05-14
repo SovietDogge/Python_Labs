@@ -21,3 +21,4 @@ class MySpider(scrapy.Spider):
         yield weather_dict
         df = pd.DataFrame(weather_dict)
         df.to_excel('aboba.xlsx')
+        return df
