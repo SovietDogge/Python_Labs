@@ -51,27 +51,26 @@ def test_task_2(mock_in):
         assert mock_op.mock_calls == expected_output
 
 
-@patch('task_6.open')
-def test_task_3(mock_op):
-    mock_op = mock_open(mock_op, read_data=PYTHON_FEATURES)
-    actual = task_3()
-    expected_value = ['In Python you can use functions',
-                      'In Python you can use OOP',
-                      'In Python you can write classes']
+def test_task_3():
+    mock_op = mock_open(read_data=PYTHON_FEATURES)
+    with patch('task_6.open', mock_op):
+        actual = task_3()
+        expected_value = ['In Python you can use functions',
+                          'In Python you can use OOP',
+                          'In Python you can write classes']
     assert actual == expected_value
 
 
-@patch('task_6.open')
-def test_task_4(mock_op):
-    mock_op = mock_open(mock_op, read_data=PYTHON_FEATURES)
-    actual = task_4()
-    expected_output = ['In C++ you can use functions',
-                       'In C++ you can use OOP',
-                       'In C++ you can write classes']
+def test_task_4():
+    mock_op = mock_open(read_data=PYTHON_FEATURES)
+    with patch('task_6.open', mock_op):
+        actual = task_4()
+        expected_output = ['In C++ you can use functions',
+                           'In C++ you can use OOP',
+                           'In C++ you can write classes']
     assert actual == expected_output
 
 
-@patch('task_6.open')
 @patch('task_6.input')
 @pytest.mark.parametrize('input_data, expected_data', [(['0'], [call('guest_book.txt', 'a'),
                                                                 call().__enter__(),
@@ -80,42 +79,42 @@ def test_task_4(mock_op):
                                                                        call().__enter__(),
                                                                        call().write('Welcome! bro\n'),
                                                                        call().__exit__(None, None, None)])])
-def test_task_5(mock_i, mock_op, input_data, expected_data):
-    mock_op = mock_open(mock_op)
-    mock_i.side_effect = input_data
-    task_5()
-    mock_i.assert_has_calls([call().write('Welcome! bro\n')])
-    actual = mock_op.mock_calls
+def test_task_5(mock_i, input_data, expected_data):
+    mock_op = mock_open()
+    with patch('task_6.open', mock_op):
+        mock_i.side_effect = input_data
+        task_5()
+        mock_i.assert_has_calls([call().write('Welcome! bro\n')])
+        actual = mock_op.mock_calls
     assert actual == expected_data
 
 
-@patch('task_6.open')
-def test_task_6(mock_op):
-    mock_op = mock_open(mock_op, read_data=BOOK_1)
-    actual = task_6()
-    expected = 123
+def test_task_6():
+    mock_op = mock_open(read_data=BOOK_1)
+    with patch('task_6.open', mock_op):
+        actual = task_6()
+        expected = 123
     assert actual == expected
 
 
-@patch('task_6.open')
-def test_task_7(mock_op):
-    mock_op = mock_open(mock_op, read_data='test_1\ntest_2 \ntes.t_3')
-    task_7('test_t7.txt')
-    actual = mock_op.mock_calls
-    expected = [call('test_t7.txt', 'rt'),
-                call().__enter__(),
-                call().read(),
-                call().__exit__(None, None, None),
-                call('formatted_text.txt', 'wt'),
-                call().__enter__(),
-                call().write('theThetih sbhs kbnsk fmbSL:bnlsn thekb;nsdkgThethe'),
-                call().__exit__(None, None, None)]
+def test_task_7():
+    mock_op = mock_open(read_data='test_1\ntest_2 \ntes.t_3')
+    with patch('task_6.open', mock_op):
+        task_7('test_t7.txt')
+        actual = mock_op.mock_calls
+        expected = [call('test_t7.txt', 'rt'),
+                    call().__enter__(),
+                    call().read(),
+                    call().__exit__(None, None, None),
+                    call('formatted_text.txt', 'wt'),
+                    call().__enter__(),
+                    call().write('theThetih sbhs kbnsk fmbSL:bnlsn thekb;nsdkgThethe'),
+                    call().__exit__(None, None, None)]
     assert actual == expected
 
 
-@patch('task_6.open')
-def test_task_8(mock_op):
-    mock_op = mock_open(mock_op, read_data='''CHAPTER I. START IN LIFE\n
+def test_task_8():
+    mock_op = mock_open(read_data='''CHAPTER I. START IN LIFE\n
 
 CHAPTER II. SLAVERY AND ESCAPE
 
@@ -156,41 +155,41 @@ wrnwrnwrn
 CHAPTER XX. FIGHT BETWEEN FRIDAY AND A BEAR
 wewhw
 welmgwelmglwmergwmgwrmg''')
-    task_8('test_t8.txt')
-    actual = mock_op.mock_calls
-    expected = [call('test_t8.txt', 'rt', encoding='UTF-8'),
-                call().__enter__(),
-                call().__iter__(),
-                call().__exit__(None, None, None),
-                call('chapters.txt', 'wt', encoding='UTF-8'),
-                call().__enter__(),
-                call().write('CHAPTER I. START IN LIFE\n\n'),
-                call().write('CHAPTER II. SLAVERY AND ESCAPE\n\n'),
-                call().write('CHAPTER III. WRECKED ON A DESERT ISLAND\n\n'),
-                call().write('CHAPTER IV. FIRST WEEKS ON THE ISLAND\n\n'),
-                call().write('CHAPTER V. BUILDS A HOUSE—THE JOURNAL\n\n'),
-                call().write('CHAPTER VI. ILL AND CONSCIENCE-STRICKEN\n\n'),
-                call().write('CHAPTER VII. AGRICULTURAL EXPERIENCE\n\n'),
-                call().write('CHAPTER VIII. SURVEYS HIS POSITION\n\n'),
-                call().write('CHAPTER IX. A BOAT\n\n'),
-                call().write('CHAPTER X. TAMES GOATS\n\n'),
-                call().write('CHAPTER XI. FINDS PRINT OF MAN’S FOOT ON THE SAND\n\n'),
-                call().write('CHAPTER XII. A CAVE RETREAT\n\n'),
-                call().write('CHAPTER XIII. WRECK OF A SPANISH SHIP\n\n'),
-                call().write('CHAPTER XIV. A DREAM REALISED\n\n'),
-                call().write('CHAPTER XV. FRIDAY’S EDUCATION\n\n'),
-                call().write('CHAPTER XVI. RESCUE OF PRISONERS FROM CANNIBALS\n\n'),
-                call().write('CHAPTER XVII. VISIT OF MUTINEERS\n\n'),
-                call().write('CHAPTER XVIII. THE SHIP RECOVERED\n\n'),
-                call().write('CHAPTER XIX. RETURN TO ENGLAND\n\n'),
-                call().write('CHAPTER XX. FIGHT BETWEEN FRIDAY AND A BEAR\n\n'),
-                call().__exit__(None, None, None)]
+    with patch('task_6.open', mock_op):
+        task_8('test_t8.txt')
+        actual = mock_op.mock_calls
+        expected = [call('test_t8.txt', 'rt', encoding='UTF-8'),
+                    call().__enter__(),
+                    call().__iter__(),
+                    call().__exit__(None, None, None),
+                    call('chapters.txt', 'wt', encoding='UTF-8'),
+                    call().__enter__(),
+                    call().write('CHAPTER I. START IN LIFE\n\n'),
+                    call().write('CHAPTER II. SLAVERY AND ESCAPE\n\n'),
+                    call().write('CHAPTER III. WRECKED ON A DESERT ISLAND\n\n'),
+                    call().write('CHAPTER IV. FIRST WEEKS ON THE ISLAND\n\n'),
+                    call().write('CHAPTER V. BUILDS A HOUSE—THE JOURNAL\n\n'),
+                    call().write('CHAPTER VI. ILL AND CONSCIENCE-STRICKEN\n\n'),
+                    call().write('CHAPTER VII. AGRICULTURAL EXPERIENCE\n\n'),
+                    call().write('CHAPTER VIII. SURVEYS HIS POSITION\n\n'),
+                    call().write('CHAPTER IX. A BOAT\n\n'),
+                    call().write('CHAPTER X. TAMES GOATS\n\n'),
+                    call().write('CHAPTER XI. FINDS PRINT OF MAN’S FOOT ON THE SAND\n\n'),
+                    call().write('CHAPTER XII. A CAVE RETREAT\n\n'),
+                    call().write('CHAPTER XIII. WRECK OF A SPANISH SHIP\n\n'),
+                    call().write('CHAPTER XIV. A DREAM REALISED\n\n'),
+                    call().write('CHAPTER XV. FRIDAY’S EDUCATION\n\n'),
+                    call().write('CHAPTER XVI. RESCUE OF PRISONERS FROM CANNIBALS\n\n'),
+                    call().write('CHAPTER XVII. VISIT OF MUTINEERS\n\n'),
+                    call().write('CHAPTER XVIII. THE SHIP RECOVERED\n\n'),
+                    call().write('CHAPTER XIX. RETURN TO ENGLAND\n\n'),
+                    call().write('CHAPTER XX. FIGHT BETWEEN FRIDAY AND A BEAR\n\n'),
+                    call().__exit__(None, None, None)]
     assert actual == expected
 
 
-@patch('task_6.open')
-def test_task_9(mock_op):
-    mock_op = mock_open(mock_op, read_data='''The Project Gutenberg eBook of The Count of Monte Cristo, by Alexandre Dumas, père
+def test_task_9():
+    mock_op = mock_open(read_data='''The Project Gutenberg eBook of The Count of Monte Cristo, by Alexandre Dumas, père
 
 This eBook is for the use of anyone anywhere in the United States and
 most other parts of the world at no cost and with almost no restrictions
@@ -208,27 +207,30 @@ Release Date: January, 1998 [eBook #1184]
 [Last updated: October 14, 2022]
 
 ''')
-    actual = task_9('test_t9.txt')
-    expected = f'Percentage of upper letters is 7.269155206286837\n' \
-               f'Percentage of lower letters is 92.73084479371316'
+    with patch('task_6.open', mock_op):
+        actual = task_9('test_t9.txt')
+        expected = f'Percentage of upper letters is 7.269155206286837\n' \
+                   f'Percentage of lower letters is 92.73084479371316'
     assert actual == expected
 
 
-@patch('task_6.open')
 @patch('task_6.connect')
-def test_task_10(mock_con, mock_op):
-    mock_op = mock_open(mock_op, read_data='''The Shawshank Redemption, 1994, 9.2
+def test_task_10(mock_con):
+    mock_op = mock_open(read_data='''The Shawshank Redemption, 1994, 9.2
 The Godfather, 1972, 9.2
 The Dark Knight, 2008, 9.0
 V for Vendetta, 2005, 8.2
 The Big Lebowski, 1998, 8.1
 Ratatouille, 2007, 8.0
 ''')
-    expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2),
-                (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2), (5, 'The Big Lebowski', 1998, 8.1),
-                (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
-                (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0),
-                (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
-                (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
-    actual = task_10()
+    with patch('task_6.open', mock_op):
+        expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2),
+                    (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2),
+                    (5, 'The Big Lebowski', 1998, 8.1),
+                    (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
+                    (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0),
+                    (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0),
+                    (2, 'The Godfather', 1972, 9.2),
+                    (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
+        actual = task_10()
     assert actual == expected
