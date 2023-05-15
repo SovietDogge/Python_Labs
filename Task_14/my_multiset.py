@@ -55,8 +55,7 @@ class MyMultiSet:
             else:
                 new_set[key] = value
 
-        new_multiset = MyMultiSet(new_set)
-        return new_multiset
+        return MyMultiSet(new_set)
 
     def intersection(self, set_to_intersect):
         new_set = {}
@@ -67,5 +66,4 @@ class MyMultiSet:
                 else:
                     new_set[key] = self.__count_nums[key]
 
-        new_multiset = MyMultiSet(new_set)
-        return new_multiset
+        return MyMultiSet(new_set)
