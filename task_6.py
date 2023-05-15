@@ -3,10 +3,11 @@ import re as r
 
 
 NUM_CHECK_PAIRED = 'num_characteristic.txt'
+LEARN_P = 'learning_python.txt'
 
 
-def task_1():
-    with open('numbers.txt', 'rt') as nums:
+def task_1(path='numbers.txt'):
+    with open(path, 'rt') as nums:
         amount = sum([float(num) for num in nums])
 
     with open('amount.txt', 'wt') as file:
@@ -14,30 +15,30 @@ def task_1():
     return amount
 
 
-def task_2():
+def task_2(path=NUM_CHECK_PAIRED):
     try:
         num = int(input('Enter any number: '))
-        with open(NUM_CHECK_PAIRED, 'wt') as check_paired_file:
+        with open(path, 'wt') as check_paired_file:
             num_status = f'Num {num} is paired' if num % 2 == 0 else f'Num {num} is not paired'
             check_paired_file.write(num_status)
     except ValueError:
         raise Exception('It must be a number')
 
 
-def task_3():
-    with open('learning_python.txt', 'rt') as file:
+def task_3(path=LEARN_P):
+    with open(path, 'rt') as file:
         python_features = [line.rstrip('\n') for line in file]
         return python_features
 
 
-def task_4():
-    with open('learning_python.txt', 'rt') as file:
+def task_4(path=LEARN_P):
+    with open(path, 'rt') as file:
         python_features = [line.replace('Python', 'C++').rstrip('\n') for line in file]
         return python_features
 
 
-def task_5():
-    with open('guest_book.txt', 'a') as file:
+def task_5(path='guest_book.txt'):
+    with open(path, 'a') as file:
         while True:
             name = input()
             if name == '0':
@@ -46,8 +47,8 @@ def task_5():
             file.write(greeting)
 
 
-def task_6():
-    with open('book_1.txt', 'rt') as book:
+def task_6(path='book_1.txt'):
+    with open(path, 'rt') as book:
         return book.read().lower().count('the')
 
 
@@ -75,14 +76,15 @@ def task_9(path):
 
         for letter in text:
             if letter.isalpha():
-                if letter in 'QWERTYUIOPASDFGHJKLZXCVBNM':
+                if letter.isupper():
                     count_upper_letters += 1
-                elif letter in 'qwertyuiopasdfghjklzxcvbnm':
+                elif letter.islower():
                     count_lower_letters += 1
 
     count_letters = count_upper_letters + count_lower_letters
-    return f'Percentage of upper letters is {(count_upper_letters / count_letters) * 100}\n' \
-           f'Percentage of lower letters is {(count_lower_letters / count_letters) * 100}'
+    percentage = (count_upper_letters / count_letters) * 100
+    return f'Percentage of upper letters is {percentage}\n' \
+           f'Percentage of lower letters is {100 - percentage}'
 
 
 def task_10():
