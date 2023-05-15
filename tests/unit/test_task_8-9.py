@@ -130,11 +130,12 @@ def test_task_5(mock_val, mock_def, input_value, expected_value):
     assert actual == expected_value
 
 
-@pytest.mark.parametrize('input_value, expected_value', [((2, 2, '+'), 4), ((2, 2, '-'), 0), ((2, 2, '/'), 1),
-                                                         ((2, 2, '*'), 4), ((3, 2, 'mod'), 1),
-                                                         ((45, 21, 'div'), 2), ((3, 2, 'pow'), 9)])
-def test_make_calculations(input_value, expected_value):
-    actual = make_calculations(input_value[0], input_value[1], input_value[2])
+@pytest.mark.parametrize('first_num, second_num, operator, expected_value',
+                         [(2, 2, '+', 4), (2, 2, '-', 0), (2, 2, '/', 1),
+                          (2, 2, '*', 4), (3, 2, 'mod', 1),
+                          (45, 21, 'div', 2), (3, 2, 'pow', 9)])
+def test_make_calculations(first_num, second_num, operator, expected_value):
+    actual = make_calculations(first_num, second_num, operator)
     assert actual == expected_value
 
 
