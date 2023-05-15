@@ -84,6 +84,7 @@ def test_task_5(mock_i, mock_op, input_data, expected_data):
     mock_op = mock_open(mock_op)
     mock_i.side_effect = input_data
     task_5()
+    mock_i.assert_has_calls([call().write('Welcome! bro\n')])
     actual = mock_op.mock_calls
     assert actual == expected_data
 
@@ -98,7 +99,7 @@ def test_task_6(mock_op):
 
 @patch('task_6.open')
 def test_task_7(mock_op):
-    mock_op = mock_open(mock_op, read_data='theThetih\nsbhs\nkbnsk\nfmbSL:bnlsn\nthekb;nsdkgThethe')
+    mock_op = mock_open(mock_op, read_data='test_1\ntest_2 \ntes.t_3')
     task_7('test_t7.txt')
     actual = mock_op.mock_calls
     expected = [call('test_t7.txt', 'rt'),
@@ -214,7 +215,8 @@ Release Date: January, 1998 [eBook #1184]
 
 
 @patch('task_6.open')
-def test_task_10(mock_op):
+@patch('task_6.connect')
+def test_task_10(mock_con, mock_op):
     mock_op = mock_open(mock_op, read_data='''The Shawshank Redemption, 1994, 9.2
 The Godfather, 1972, 9.2
 The Dark Knight, 2008, 9.0
@@ -228,6 +230,5 @@ Ratatouille, 2007, 8.0
                 (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0),
                 (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
                 (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
-    print(len(expected))
     actual = task_10()
     assert actual == expected

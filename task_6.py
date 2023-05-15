@@ -1,4 +1,4 @@
-import sqlite3 as sq
+from sqlite3 import connect
 import re as r
 
 
@@ -72,11 +72,12 @@ def task_9(path):
     count_lower_letters = 0
     with open(path, 'rt', encoding='UTF-8') as book:
         text = book.read()
+
         for letter in text:
             if letter.isalpha():
                 if letter in 'QWERTYUIOPASDFGHJKLZXCVBNM':
                     count_upper_letters += 1
-                if letter in 'qwertyuiopasdfghjklzxcvbnm':
+                elif letter in 'qwertyuiopasdfghjklzxcvbnm':
                     count_lower_letters += 1
 
     count_letters = count_upper_letters + count_lower_letters
@@ -85,7 +86,7 @@ def task_9(path):
 
 
 def task_10():
-    with sq.connect('imdb.db') as db_imdb:
+    with connect('imdb.db') as db_imdb:
         cur = db_imdb.cursor()
         cur.execute('''CREATE TABLE IF NOT EXISTS ratings
         (id INTEGER PRIMARY KEY,
