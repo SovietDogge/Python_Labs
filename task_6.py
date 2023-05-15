@@ -69,20 +69,12 @@ def task_8(path):
 
 
 def task_9(path):
-    count_upper_letters = 0
-    count_lower_letters = 0
     with open(path, 'rt', encoding='UTF-8') as book:
         text = book.read()
+    all_letters = [letter for letter in text if letter.isalpha()]
+    upper_letters = [letter for letter in all_letters if letter.isupper()]
 
-        for letter in text:
-            if letter.isalpha():
-                if letter.isupper():
-                    count_upper_letters += 1
-                elif letter.islower():
-                    count_lower_letters += 1
-
-    count_letters = count_upper_letters + count_lower_letters
-    percentage = (count_upper_letters / count_letters) * 100
+    percentage = (len(upper_letters) / len(all_letters)) * 100
     return f'Percentage of upper letters is {percentage}\n' \
            f'Percentage of lower letters is {100 - percentage}'
 
@@ -105,15 +97,18 @@ def task_10():
         cur.execute('SELECT * FROM ratings')
         db_imdb.commit()
         films = cur.fetchall()
+        print(films)
         cur.execute('''SELECT * FROM ratings
                             WHERE rating > 8.7
                             order by title''')
         db_imdb.commit()
         films += cur.fetchall()
+        print(films)
         cur.execute('''SELECT * FROM ratings
                                 order by title''')
         db_imdb.commit()
         films += cur.fetchall()
+        print(films)
         return films
 
 

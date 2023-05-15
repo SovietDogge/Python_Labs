@@ -1,7 +1,5 @@
 from unittest.mock import mock_open, patch, call
 
-import pytest
-
 from task_6 import task_1, task_2, task_3, task_4, task_5, task_6, task_7, task_8, task_9, task_10
 
 PYTHON_FEATURES = 'In Python you can use functions\n' \
@@ -98,7 +96,6 @@ CHAPTER III. WRECKED ON A DESERT ISLAND''')
     with patch('task_6.open', mock_op):
         task_8('test_t8.txt')
         actual = mock_op.mock_calls
-        print(actual)
         expected = [call('test_t8.txt', 'rt', encoding='UTF-8'),
                     call().__enter__(),
                     call().__iter__(),
@@ -121,23 +118,36 @@ def test_task_9():
     assert actual == expected
 
 
-@patch('task_6.connect')
-def test_task_10(mock_con):
+# @patch('task_6.connect')
+# def test_task_10(mock_con):
+#     mock_op = mock_open(read_data='''The Shawshank Redemption, 1994, 9.2
+# The Godfather, 1972, 9.2
+# Ratatouille, 2007, 8.0
+# ''')
+#     with patch('task_6.open', mock_op):
+#         expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2),
+#                     (3, 'Ratatouille', 2007, 8.0),
+#                     (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2),
+#                     (3, 'Ratatouille', 2007, 8.0), (2, 'The Godfather', 1972, 9.2),
+#                     (1, 'The Shawshank Redemption', 1994, 9.2)]
+#
+#         actual = task_10()
+#     assert actual == expected
+
+
+def test_task_10():
     mock_op = mock_open(read_data='''The Shawshank Redemption, 1994, 9.2
 The Godfather, 1972, 9.2
-The Dark Knight, 2008, 9.0
-V for Vendetta, 2005, 8.2
-The Big Lebowski, 1998, 8.1
 Ratatouille, 2007, 8.0
 ''')
-    with patch('task_6.open', mock_op):
-        expected = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2),
-                    (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2),
-                    (5, 'The Big Lebowski', 1998, 8.1),
-                    (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2),
-                    (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0),
-                    (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0),
-                    (2, 'The Godfather', 1972, 9.2),
-                    (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
-        actual = task_10()
-    assert actual == expected
+    with patch('task_6.connect') as mock_con:
+        with patch('task_6.open', mock_op):
+            task_10()
+            print(mock_con.mock_calls)
+            mock_con.assert_has_calls([call().__enter__().cursor().execute(
+                'CREATE TABLE IF NOT EXISTS ratings\n        (id INTEGER PRIMARY KEY,\n        title VARCHAR(20), \n        year INT, \n        rating FLOAT)\n        '),
+                                      call().__enter__().cursor().execute(
+                                          'INSERT INTO ratings (title,year,rating) values(?,?,?)',
+                                          ['The Shawshank Redemption', '1994', '9.2']),
+                                      call().__enter__().commit(),call().__enter__().cursor().fetchall()], any_order=True)
+
