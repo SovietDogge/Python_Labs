@@ -55,38 +55,20 @@ class MainApp(MDApp):
                 self.root.ids.btn9.disabled == True:
             self.root.ids.score.text = 'It\'s a tie!'
 
+    def check_win(self, btn1, btn2, btn3):
+        if btn1.text != '' and btn1.text == btn2.text and btn2.text == btn3.text:
+            self.end_game(btn1, btn2, btn3)
+
     def win(self):
-        if self.root.ids.btn1.text != '' and self.root.ids.btn1.text == self.root.ids.btn2.text and \
-                self.root.ids.btn2.text == self.root.ids.btn3.text:
-            self.end_game(self.root.ids.btn1, self.root.ids.btn2, self.root.ids.btn3)
 
-        if self.root.ids.btn4.text != '' and self.root.ids.btn4.text == self.root.ids.btn5.text and \
-                self.root.ids.btn5.text == self.root.ids.btn6.text:
-            self.end_game(self.root.ids.btn4, self.root.ids.btn5, self.root.ids.btn6)
-
-        if self.root.ids.btn7.text != '' and self.root.ids.btn7.text == self.root.ids.btn8.text and \
-                self.root.ids.btn8.text == self.root.ids.btn9.text:
-            self.end_game(self.root.ids.btn7, self.root.ids.btn8, self.root.ids.btn9)
-
-        if self.root.ids.btn1.text != '' and self.root.ids.btn1.text == self.root.ids.btn4.text and \
-                self.root.ids.btn4.text == self.root.ids.btn7.text:
-            self.end_game(self.root.ids.btn1, self.root.ids.btn4, self.root.ids.btn7)
-
-        if self.root.ids.btn2.text != '' and self.root.ids.btn2.text == self.root.ids.btn5.text and \
-                self.root.ids.btn5.text == self.root.ids.btn8.text:
-            self.end_game(self.root.ids.btn2, self.root.ids.btn5, self.root.ids.btn8)
-
-        if self.root.ids.btn3.text != '' and self.root.ids.btn3.text == self.root.ids.btn6.text and \
-                self.root.ids.btn6.text == self.root.ids.btn9.text:
-            self.end_game(self.root.ids.btn3, self.root.ids.btn6, self.root.ids.btn9)
-
-        if self.root.ids.btn1.text != '' and self.root.ids.btn1.text == self.root.ids.btn5.text and \
-                self.root.ids.btn5.text == self.root.ids.btn9.text:
-            self.end_game(self.root.ids.btn1, self.root.ids.btn5, self.root.ids.btn9)
-
-        if self.root.ids.btn3.text != '' and self.root.ids.btn3.text == self.root.ids.btn5.text and \
-                self.root.ids.btn5.text == self.root.ids.btn7.text:
-            self.end_game(self.root.ids.btn3, self.root.ids.btn5, self.root.ids.btn7)
+        self.check_win(self.root.ids.btn1, self.root.ids.btn2, self.root.ids.btn3)
+        self.check_win(self.root.ids.btn4, self.root.ids.btn5, self.root.ids.btn6)
+        self.check_win(self.root.ids.btn7, self.root.ids.btn8, self.root.ids.btn9)
+        self.check_win(self.root.ids.btn1, self.root.ids.btn4, self.root.ids.btn7)
+        self.check_win(self.root.ids.btn2, self.root.ids.btn5, self.root.ids.btn8)
+        self.check_win(self.root.ids.btn3, self.root.ids.btn6, self.root.ids.btn9)
+        self.check_win(self.root.ids.btn1, self.root.ids.btn5, self.root.ids.btn9)
+        self.check_win(self.root.ids.btn3, self.root.ids.btn5, self.root.ids.btn7)
 
         self.no_winner()
 
@@ -106,42 +88,11 @@ class MainApp(MDApp):
 
     def restart(self):
         self.turn = 'X'
-        # buttons = [self.root.ids.btn1, self.root.ids.btn2, self.root.ids.btn3, self.root.ids.btn4,
-        #            self.root.ids.btn5, self.root.ids.btn6,
-        #            self.root.ids.btn7, self.root.ids.btn8, self.root.ids.btn9]
-        # for i in enumerate(buttons):
-        #     buttons[i].disabled = False
-        #     buttons[i].text = ''
-        #     buttons[i].color = 'blue'
-        self.root.ids.btn1.disabled = False
-        self.root.ids.btn2.disabled = False
-        self.root.ids.btn3.disabled = False
-        self.root.ids.btn4.disabled = False
-        self.root.ids.btn5.disabled = False
-        self.root.ids.btn6.disabled = False
-        self.root.ids.btn7.disabled = False
-        self.root.ids.btn8.disabled = False
-        self.root.ids.btn9.disabled = False
 
-        self.root.ids.btn1.text = ''
-        self.root.ids.btn2.text = ''
-        self.root.ids.btn3.text = ''
-        self.root.ids.btn4.text = ''
-        self.root.ids.btn5.text = ''
-        self.root.ids.btn6.text = ''
-        self.root.ids.btn7.text = ''
-        self.root.ids.btn8.text = ''
-        self.root.ids.btn9.text = ''
-
-        self.root.ids.btn1.color = 'blue'
-        self.root.ids.btn2.color = 'blue'
-        self.root.ids.btn3.color = 'blue'
-        self.root.ids.btn4.color = 'blue'
-        self.root.ids.btn5.color = 'blue'
-        self.root.ids.btn6.color = 'blue'
-        self.root.ids.btn7.color = 'blue'
-        self.root.ids.btn8.color = 'blue'
-        self.root.ids.btn9.color = 'blue'
+        for i in range(1, 10):
+            self.root.ids[f'btn{i}'].disabled = False
+            self.root.ids[f'btn{i}'].text = ''
+            self.root.ids[f'btn{i}'].color = 'blue'
 
         self.root.ids.score.text = 'X\'s Turn'
 
