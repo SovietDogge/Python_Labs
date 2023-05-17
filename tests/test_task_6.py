@@ -2,8 +2,8 @@ from unittest.mock import mock_open, patch, call
 
 from task_6 import task_1, task_2, task_3, task_4, task_5, task_6, task_7, task_8, task_9, task_10
 
-PYTHON_FEATURES = 'In Python you can use functions\n' \
-                  'In Python you can use OOP\n' \
+PYTHON_FEATURES = 'In Python test \n' \
+                  'In Python 765\n' \
                   'In Python you can write classes'
 BOOK_1 = 'Several narrative accounts of the navy of the American Revolution have been written. These usually form' \
          ' the introductory part of a history of the American Navy since 1789. The earliest of these accounts is '
@@ -89,7 +89,7 @@ def test_task_7():
 
 def test_task_8():
     mock_op = mock_open(read_data='''CHAPTER I. START IN LIFE
-
+test
 CHAPTER II. SLAVERY AND ESCAPE
 
 CHAPTER III. WRECKED ON A DESERT ISLAND''')
@@ -110,7 +110,7 @@ CHAPTER III. WRECKED ON A DESERT ISLAND''')
 
 
 def test_task_9():
-    mock_op = mock_open(read_data='The Project Gutenberg eBook of The Count of Monte Cristo, by Alexandre Dumas, père')
+    mock_op = mock_open(read_data='TEST.)1_te')
     with patch('task_6.open', mock_op):
         actual = task_9('test_t9.txt')
         expected = f'Percentage of upper letters is 14.925373134328357\n' \
@@ -136,18 +136,28 @@ def test_task_9():
 
 
 def test_task_10():
-    mock_op = mock_open(read_data='''The Shawshank Redemption, 1994, 9.2
-The Godfather, 1972, 9.2
+    mock_op = mock_open(read_data='''test_film, 1994, 9.2
+test_film_1, 1972, 9.2
 Ratatouille, 2007, 8.0
 ''')
     with patch('task_6.connect') as mock_con:
         with patch('task_6.open', mock_op):
             task_10()
-            print(mock_con.mock_calls)
             mock_con.assert_has_calls([call().__enter__().cursor().execute(
-                'CREATE TABLE IF NOT EXISTS ratings\n        (id INTEGER PRIMARY KEY,\n        title VARCHAR(20), \n        year INT, \n        rating FLOAT)\n        '),
-                                      call().__enter__().cursor().execute(
-                                          'INSERT INTO ratings (title,year,rating) values(?,?,?)',
-                                          ['The Shawshank Redemption', '1994', '9.2']),
-                                      call().__enter__().commit(),call().__enter__().cursor().fetchall()], any_order=True)
-
+                'CREATE TABLE IF NOT EXISTS ratings\n        (id INTEGER PRIMARY KEY,\n        title VARCHAR(20), \n   '
+                '     year INT, \n        rating FLOAT)\n        '),
+                call().__enter__().cursor().execute(
+                    'INSERT INTO ratings (title,year,rating) values(?,?,?)',
+                    ['The Shawshank Redemption', '1994', '9.2']),
+                call().__enter__().commit(), call().__enter__().cursor().fetchall(),
+                call().__enter__().cursor().execute(
+                    'INSERT INTO ratings (title,year,rating) values(?,?,?)',
+                    ['Ratatouille', '2007', '8.0']),
+                call().__enter__().cursor().execute('INSERT INTO ratings (title,year,rating) values(?,?,?)',
+                                                    ['The Godfather', '1972', '9.2']),
+                call().__enter__().cursor().execute('SELECT * FROM ratings'),
+                call().__enter__().cursor().execute(
+                    'SELECT * FROM ratings\n                            WHERE rating > 8.7\n   '
+                    '                         order by title'),
+                call().__enter__().cursor().execute(
+                    'SELECT * FROM ratings\n                                order by title')], any_order=True)
