@@ -64,9 +64,10 @@ class Line:
 
 if __name__ == '__main__':
     a = Point('6', 10)
-    b = Point('svv', 20)
+    b = Point(12, 20)
+    print(a == b)
     exmpl = Line(a, b)
-    print(exmpl.find_middle_point())
-    print(exmpl.find_length())
-    print(exmpl.find_x_projection())
-    print(exmpl.find_y_projection())
+    # print(exmpl.find_middle_point())
+    # print(exmpl.find_length())
+    # print(exmpl.find_x_projection())
+    # print(exmpl.find_y_projection())
