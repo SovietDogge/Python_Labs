@@ -52,7 +52,7 @@ def test_str(test_point_a):
 def test_find_middle_point(test_line):
     expected_output = 'x = 3.0, y = 5.0'
     actual = test_line.find_middle_point()
-    assert str(actual) == expected_output
+    assert actual == expected_output
 
 
 def test_find_length(test_line):

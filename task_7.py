@@ -21,6 +21,9 @@ class Point:
         coord_y = self.__y + other.__y
         return Point(coord_x, coord_y)
 
+    def __eq__(self, other):
+        return self.__x == other.__x and self.__y == other.__y
+
     @property
     def x(self):
         return self.__x
