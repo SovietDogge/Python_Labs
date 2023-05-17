@@ -10,27 +10,26 @@ POSSIBLE_BANKNOTES = {1: 'Vladimir Velikiy', 2: 'Yroslav Mudryi', 5: 'Bogda Hmel
                       1000: 'Vladimir Vernadskyi'}
 POSSIBLE_COORDINATES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 POSSIBLE_VARIANTS = ['rock', 'paper', 'scissors']
+MONTH = {'January': 31, 'March': 31, 'May': 31, 'July': 31,
+         'August': 31, 'October': 31, 'December': 31, 'April': 30, 'June': 30,
+         'September': 30, 'November': 30}
 
 
 def print_greeting(name):
-    if name == 'Admin':
-        return 'Admin, I hope you are well'
-    return f'{name}, thank you for logging in again'
+    return 'Admin, I hope you are well' if name == 'Admin' else f'{name}, thank you for logging in again'
 
 
 def task_1(users):
-    if len(users) != 0:
-        for user in users:
-            print(print_greeting(user))
+    for user in users:
+        print(print_greeting(user))
     else:
         print(EMPTY_USERS_WARNING)
 
 
 def task_2(sides_count):
     sides_count = nums_validation(sides_count)
-    for i in range(3, 7):
-        if i == sides_count:
-            return f'It is a {i}-angle!'
+    if list(range(3, 7)) == sides_count:
+        return f'It is a {i}-angle!'
     return f"{sides_count} isn't a correct value"
 
 
@@ -62,18 +61,15 @@ def define_nom_of_days():
 
 
 def task_5(users_month):
-    months = {'January': 31, 'March': 31, 'May': 31, 'July': 31,
-              'August': 31, 'October': 31, 'December': 31, 'April': 30, 'June': 30,
-              'September': 30, 'November': 30}
-    users_month = validation_pattern(users_month, months.keys())
-    return months[users_month] if users_month != 'February' else define_nom_of_days()
+    users_month = validation_pattern(users_month, MONTH.keys())
+    return MONTH[users_month] if users_month != 'February' else define_nom_of_days()
 
 
 def task_7():
     summary = 0
     while True:
         num = nums_validation(input())
-        if num == 0:
+        if not num:
             return summary
         summary += num
 
@@ -87,7 +83,7 @@ def make_calculations(number1, number2, oper):
         try:
             return number1 / number2
         except ZeroDivisionError:
-            raise Exception('You can\'t divide by zero')
+            return None
     elif oper == '*':
         return number1 * number2
     elif oper == 'mod':
@@ -96,7 +92,7 @@ def make_calculations(number1, number2, oper):
         try:
             return number1 // number2
         except ZeroDivisionError:
-            raise Exception('You can\'t divide by zero')
+            return None
     elif oper == 'pow':
         return number1 ** number2
 
@@ -114,10 +110,8 @@ def task_9(value):
 
 
 def define_color(horizon_cor, vertical_cor):
-    if (horizon_cor in 'aceg' and vertical_cor % 2 == 1) or \
-            (horizon_cor in 'bdfh' and vertical_cor % 2 == 0):
-        return 'black'
-    return 'white'
+    return 'black'if (horizon_cor in 'aceg' and vertical_cor % 2 == 1) or \
+            (horizon_cor in 'bdfh' and vertical_cor % 2 == 0) else 'white'
 
 
 def task_10():
@@ -169,4 +163,6 @@ def task_12():
 
 
 if __name__ == '__main__':
-    print(task_12())
+    # print(task_12())
+    # task_1([])
+    task_7()
