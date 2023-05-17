@@ -28,8 +28,8 @@ def task_1(users):
 
 def task_2(sides_count):
     sides_count = nums_validation(sides_count)
-    if list(range(3, 7)) == sides_count:
-        return f'It is a {i}-angle!'
+    if sides_count in (3, 4, 5, 6):
+        return f'It is a {sides_count}-angle!'
     return f"{sides_count} isn't a correct value"
 
 
@@ -165,4 +165,5 @@ def task_12():
 if __name__ == '__main__':
     # print(task_12())
     # task_1([])
-    task_7()
+    # task_7()
+    print(task_2(8))
