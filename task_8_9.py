@@ -15,15 +15,11 @@ MONTH = {'January': 31, 'March': 31, 'May': 31, 'July': 31,
          'September': 30, 'November': 30}
 
 
-def print_greeting(name):
-    return 'Admin, I hope you are well' if name == 'Admin' else f'{name}, thank you for logging in again'
-
-
 def task_1(users):
-    for user in users:
-        print(print_greeting(user))
-    else:
-        print(EMPTY_USERS_WARNING)
+    if len(users):
+        return ['Admin, I hope you are well' if name == 'Admin' else f'{name}, thank you for logging in again'
+                for name in users]
+    return EMPTY_USERS_WARNING
 
 
 def task_2(sides_count):
@@ -35,13 +31,18 @@ def task_2(sides_count):
 
 def task_3():
     nums = [i for i in range(1, 10)]
+    result = ''
     for num in nums:
         if num == 1:
-            print(f'{num}-st')
-        elif num in (2, 3):
-            print(f'{num}-nd')
+            result += f'{num}-st\n'
+        elif num == 2:
+            result += f'{num}-nd\n'
+        elif num == 3:
+            result += f'{num}-rd\n'
         else:
-            print(f'{num}-th')
+            result += f'{num}-th\n'
+
+    return result
 
 
 def task_4(user_input_year):
@@ -163,7 +164,4 @@ def task_12():
 
 
 if __name__ == '__main__':
-    # print(task_12())
-    # task_1([])
-    # task_7()
-    print(task_2(8))
+    print(task_11())

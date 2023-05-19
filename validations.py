@@ -14,6 +14,8 @@ def validation_pattern(input_value, valid_value):
     if input_value in valid_value:
         return input_value
     print('Write correct value')
+    if type(input_value) == int:
+        return validation_pattern(nums_validation(input()), valid_value)
     return validation_pattern(input(), valid_value)
 
 

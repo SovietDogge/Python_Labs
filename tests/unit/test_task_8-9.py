@@ -2,9 +2,10 @@ from unittest.mock import patch
 
 import pytest
 
-from task_8_9 import print_greeting, task_2, task_4, \
-    task_5, task_7, task_6, make_calculations, define_color, convert_to_decimal, convert_to_binary, POSSIBLE_BANKNOTES, \
-    POSSIBLE_VARIANTS, POSSIBLE_OPERATOR, POSSIBLE_COORDINATES, define_nom_of_days, task_12
+from task_8_9 import task_2, task_4, \
+    task_5, task_7, task_6, make_calculations, define_color, convert_to_decimal, convert_to_binary, \
+    POSSIBLE_BANKNOTES, POSSIBLE_VARIANTS, POSSIBLE_OPERATOR, POSSIBLE_COORDINATES, define_nom_of_days, \
+    task_12, task_3, task_1, task_10, task_9, task_8, task_11
 
 from validations import nums_validation, vert_coord_validation, validation_pattern
 
@@ -14,7 +15,50 @@ MONTHS = ['February',
           'September', 'November']
 
 
-# should add validation to recursive output
+@patch('task_8_9.input')
+@patch('task_8_9.nums_validation', return_value=5)
+@patch('task_8_9.convert_to_binary', return_value='101')
+@patch('task_8_9.convert_to_decimal', return_value=5)
+def test_task_11(mock_conv_dec, mock_conv_b, mock_num_val,mock_i):
+    actual = task_11()
+    expected = 'Number 5 in binary = 101, in Decimal = 5'
+    assert actual == expected
+
+
+@patch('task_8_9.input')
+@patch('task_8_9.validation_pattern', return_value='+')
+@patch('task_8_9.nums_validation', return_value=[2, 2])
+@patch('task_8_9.make_calculations', return_value=4)
+def test_task_8(mock_calc, mock_num_val, mock_val_p, mock_i):
+    actual = task_8()
+    expected = 'Result = 4'
+    assert actual == expected
+
+
+@patch('task_8_9.validation_pattern', return_value=20)
+def test_task_9(mock_val):
+    input_value = 20
+    actual = task_9(input_value)
+    expected = 'Ivan Franko'
+    assert actual == expected
+
+
+@patch('task_8_9.input')
+@patch('task_8_9.validation_pattern', return_value='a')
+@patch('task_8_9.vert_coord_validation', return_value=4)
+@patch('task_8_9.define_color', return_value='white')
+def test_task_10(mock_i, mock_def_color, mock_cord_val, mock_val):
+    expected_value = 'field is white'
+    actual = task_10()
+    assert actual == expected_value
+
+
+def test_task_3():
+    expected = '1-st\n2-nd\n3-rd\n4-th\n5-th\n6-th\n7-th\n8-th\n9-th\n'
+    actual = task_3()
+    assert actual == expected
+
+
 @pytest.mark.parametrize('user_input, expected_output', [('fdndn', 10), (212, 212), ('546', 546)])
 @patch('validations.nums_validation', return_value=10)
 @patch('validations.input')
@@ -76,10 +120,10 @@ def test_vert_coord_validation(mock_v, mock_i, input_value, expected_value):
     assert actual == expected_value
 
 
-@pytest.mark.parametrize('input_value, expected_value', [('Admin', 'Admin, I hope you are well'),
-                                                         ('borov', 'borov, thank you for logging in again')])
-def test_print_greeting(input_value, expected_value):
-    actual = print_greeting(input_value)
+def test_task_1():
+    input_value = ['Admin', 'borov']
+    expected_value = ['Admin, I hope you are well', 'borov, thank you for logging in again']
+    actual = task_1(input_value)
     assert actual == expected_value
 
 
