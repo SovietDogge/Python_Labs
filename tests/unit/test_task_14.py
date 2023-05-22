@@ -52,7 +52,7 @@ def test_remove(test_multiset):
     test_multiset.remove(input_value)
     expected_value = {3: 2, 1: 1, 2: 0}
 
-    assert test_multiset.count_nums== expected_value
+    assert test_multiset.count_nums == expected_value
 
 
 @pytest.mark.parametrize('input_value', [2, 6])
