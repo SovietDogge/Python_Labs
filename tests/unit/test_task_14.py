@@ -15,16 +15,16 @@ def new_set_to_test():
 
 def test_clear(test_multiset):
     test_multiset.clear()
-    expected_value = {'_MyMultiSet__count_nums': {}}
+    expected_value = {}
 
-    assert test_multiset.__dict__ == expected_value
+    assert test_multiset.count_nums == expected_value
 
 
 def test_add_num(test_multiset):
     test_multiset.add_num(3)
-    expected_output = {'_MyMultiSet__count_nums': {3: 4, 1: 1, 2: 0}}
+    expected_output = {3: 4, 1: 1, 2: 0}
 
-    assert test_multiset.__dict__ == expected_output
+    assert test_multiset.count_nums == expected_output
 
 
 @pytest.mark.parametrize('input_value, expected_value', [(3, 3), (4, None)])
@@ -42,17 +42,17 @@ def test_count_nums(test_multiset):
 def test_setter_count_nums(test_multiset):
     new_value = {1: 2, 4: 5}
     test_multiset.count_nums = new_value
-    expected_value = {'_MyMultiSet__count_nums': {1: 2, 4: 5}}
+    expected_value = {1: 2, 4: 5}
 
-    assert test_multiset.__dict__ == expected_value
+    assert test_multiset.count_nums == expected_value
 
 
 def test_remove(test_multiset):
     input_value = 3
     test_multiset.remove(input_value)
-    expected_value = {'_MyMultiSet__count_nums': {3: 2, 1: 1, 2: 0}}
+    expected_value = {3: 2, 1: 1, 2: 0}
 
-    assert test_multiset.__dict__ == expected_value
+    assert test_multiset.count_nums== expected_value
 
 
 @pytest.mark.parametrize('input_value', [2, 6])
@@ -68,13 +68,13 @@ def test_check_empty(input_value, expected_value):
 
 def test_union(test_multiset, new_set_to_test):
     actual = test_multiset.union(new_set_to_test)
-    expected = {'_MyMultiSet__count_nums': {3: 3, 2: 1, 4: 1, 1: 2}}
+    expected = {3: 3, 2: 1, 4: 1, 1: 2}
 
-    assert actual.__dict__ == expected
+    assert actual.count_nums == expected
 
 
 def test_intersection(test_multiset, new_set_to_test):
     actual = test_multiset.intersection(new_set_to_test)
-    expected = {'_MyMultiSet__count_nums': {3: 2, 1: 1, 2: 0}}
+    expected = {3: 2, 1: 1, 2: 0}
 
-    assert actual.__dict__ == expected
+    assert actual.count_nums == expected
