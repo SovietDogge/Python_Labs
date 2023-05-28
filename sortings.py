@@ -43,7 +43,8 @@ def counting_sort(sortable_list):
 
     sortable_list.clear()
 
-    sortable_list = [sortable_list.append(i) for i in range(len(count_nums)) for _ in range(count_nums[i])]
+    sortable_list = [sortable_list.append(i) for i in range(len(count_nums))
+                     for _ in range(count_nums[i])]
 
 
 def merge_sort(sortable_list):
@@ -90,7 +91,8 @@ def quick_sort(sortable_list):
     end_ind = len(sortable_list) - 1
     pivot_ind = random.randint(0, end_ind)
 
-    sortable_list[pivot_ind], sortable_list[end_ind] = sortable_list[end_ind], sortable_list[pivot_ind]
+    sortable_list[pivot_ind], sortable_list[end_ind] =\
+        sortable_list[end_ind], sortable_list[pivot_ind]
 
     pivot_ind = end_ind
     left_ind = 0
@@ -108,15 +110,18 @@ def quick_sort(sortable_list):
         else:
             is_smaller = True
         if is_smaller and is_bigger:
-            sortable_list[left_ind], sortable_list[right_ind] = sortable_list[right_ind], sortable_list[left_ind]
+            sortable_list[left_ind], sortable_list[right_ind] =\
+                sortable_list[right_ind], sortable_list[left_ind]
             is_smaller = False
             is_bigger = False
 
     if sortable_list[pivot_ind] < sortable_list[left_ind]:
-        sortable_list[pivot_ind], sortable_list[left_ind] = sortable_list[left_ind], sortable_list[pivot_ind]
+        sortable_list[pivot_ind], sortable_list[left_ind] = \
+            sortable_list[left_ind], sortable_list[pivot_ind]
         pivot_ind = left_ind
     else:
-        sortable_list[pivot_ind], sortable_list[left_ind + 1] = sortable_list[left_ind + 1], sortable_list[pivot_ind]
+        sortable_list[pivot_ind], sortable_list[left_ind + 1] = \
+            sortable_list[left_ind + 1], sortable_list[pivot_ind]
         pivot_ind = left_ind + 1
 
     sortable_list[0:pivot_ind] = quick_sort(sortable_list[0:pivot_ind])
