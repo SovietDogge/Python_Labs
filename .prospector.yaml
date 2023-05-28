@@ -5,6 +5,9 @@ ignore:
   - ^docs/
   - ^build/
   - venv
+  - tests
+  - tutorial
+  - sortings
 
 test-warnings: true
 

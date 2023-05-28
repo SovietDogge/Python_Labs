@@ -12,8 +12,8 @@ class Point:
         return f'x = {self.__x}, y = {self.__y}'
 
     def __sub__(self, other):
-        coord_x = self.__x - other.__x
-        coord_y = self.__y - other.__y
+        coord_x = self.__x - other.x
+        coord_y = self.__y - other.y
         return Point(coord_x, coord_y)
 
     def __add__(self, other):
@@ -25,11 +25,11 @@ class Point:
         return self.__x == other.__x and self.__y == other.__y
 
     @property
-    def x(self):
+    def coord_x(self):
         return self.__x
 
-    @x.setter
-    def x(self, value):
+    @coord_x.setter
+    def coord_x(self, value):
         self.__x = validate(value)
 
     @property
