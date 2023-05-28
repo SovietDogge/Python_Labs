@@ -17,18 +17,20 @@ MONTH = {'January': 31, 'March': 31, 'May': 31, 'July': 31,
 
 def task_1(users):
     if users:
-        return ['Admin, I hope you are well' if name == 'Admin' else f'{name}, thank you for logging in again'
+        return ['Admin, I hope you are well' if name == 'Admin'
+                else f'{name}, thank you for logging in again'
                 for name in users]
     return EMPTY_USERS_WARNING
 
 
 def task_2(sides_count):
     sides_count = nums_validation(sides_count)
-    return f'It is a {sides_count}-angle!' if sides_count in range(3, 7) else f"{sides_count} isn't a correct value"
+    return f'It is a {sides_count}-angle!' if sides_count in range(3, 7) \
+        else f"{sides_count} isn't a correct value"
 
 
 def task_3():
-    nums = [i for i in range(1, 10)]
+    nums = list(range(1, 10))
     result = ''
     for num in nums:
         if num == 1:
@@ -74,26 +76,28 @@ def task_7():
 
 
 def make_calculations(number1, number2, oper):
+    result = None
     if oper == '+':
-        return number1 + number2
+        result = number1 + number2
     elif oper == '-':
-        return number1 - number2
+        result = number1 - number2
     elif oper == '/':
         try:
-            return number1 / number2
+            result = number1 / number2
         except ZeroDivisionError:
             return None
     elif oper == '*':
-        return number1 * number2
+        result = number1 * number2
     elif oper == 'mod':
-        return number1 % number2
+        result = number1 % number2
     elif oper == 'div':
         try:
-            return number1 // number2
+            result = number1 // number2
         except ZeroDivisionError:
             return None
     elif oper == 'pow':
-        return number1 ** number2
+        result = number1 ** number2
+    return result
 
 
 def task_8():
@@ -109,8 +113,8 @@ def task_9(value):
 
 
 def define_color(horizon_cor, vertical_cor):
-    return 'black'if (horizon_cor in 'aceg' and vertical_cor % 2 == 1) or \
-            (horizon_cor in 'bdfh' and vertical_cor % 2 == 0) else 'white'
+    return 'black' if (horizon_cor in 'aceg' and vertical_cor % 2 == 1) or \
+                      (horizon_cor in 'bdfh' and vertical_cor % 2 == 0) else 'white'
 
 
 def task_10():
@@ -123,8 +127,8 @@ def task_10():
 def convert_to_binary(number):
     result = ''
     while number > 0:
-        r = number % 2
-        result = str(r) + result
+        r_val = number % 2
+        result = str(r_val) + result
         number = int(number / 2)
     return result
 

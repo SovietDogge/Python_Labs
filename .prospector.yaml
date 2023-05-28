@@ -8,6 +8,11 @@ ignore:
   - tests
   - tutorial
   - sortings
+  - Task 3
+  - Task 4
+  - Task 5
+  - Task1
+  - task 2
 
 test-warnings: true
 
@@ -39,3 +44,6 @@ pylint:
         # Used builtin function 'filter'.
         # (For maintainability, one should prefer list comprehension.)
         - W0141
+mccabe:
+  disable:
+    - MC0001
