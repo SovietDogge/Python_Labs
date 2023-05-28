@@ -47,4 +47,3 @@ pylint:
 mccabe:
   disable:
     - MC0001
-    
