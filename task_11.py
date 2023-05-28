@@ -9,20 +9,13 @@ def task_1(path):
         print(dates)
 
     for i, _ in enumerate(dates):
-        dates[i] = re.sub(r'\d{4}[/](?:\d{1,2})[/](?:\d{1,2})', r'(?:\d{1,2})\.(?:\d{1,2})\.\d{4}', dates[i])
+        dates[i] = re.sub(r'(\d{4})[/](\d{1,2})[/](\d{1,2})', r'\3.\2.\1', dates[i])
 
-    # for i, date in enumerate(dates):
-
-    # date = date.replace('/', '.')
-
-    # correct_date = date.split('.')
-    # for j, _ in enumerate(correct_date):
-    #     correct_date[j] = correct_date[j].zfill(2)
-    #
-    # if len(correct_date[0]) > len(correct_date[-1]):
-    #     correct_date[0], correct_date[-1] = correct_date[-1], correct_date[0]
-    #
-    # dates[i] = '.'.join(correct_date)
+    for i, date in enumerate(dates):
+        correct_date = date.split('.')
+        for j, _ in enumerate(correct_date):
+            correct_date[j] = correct_date[j].zfill(2)
+        dates[i] = '.'.join(correct_date)
 
     return dates
 
