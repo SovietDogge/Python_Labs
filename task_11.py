@@ -1,23 +1,28 @@
 import re
 
-# map
+
 def task_1(path):
     with open(path, 'rt', encoding='utf-8') as file:
         text = file.read()
         dates = re.findall(r'(?:\d{1,2})\.(?:\d{1,2})\.\d{4}', text)
         dates += re.findall(r'\d{4}[/](?:\d{1,2})[/](?:\d{1,2})', text)
         print(dates)
-    for i, date in enumerate(dates):
-        date = date.replace('/', '.')
 
-        correct_date = date.split('.')
-        for j, num in enumerate(correct_date):
-            correct_date[j] = correct_date[j].zfill(2)
+    for i, _ in enumerate(dates):
+        dates[i] = re.sub(r'\d{4}[/](?:\d{1,2})[/](?:\d{1,2})', r'(?:\d{1,2})\.(?:\d{1,2})\.\d{4}', dates[i])
 
-        if len(correct_date[0]) > len(correct_date[-1]):
-            correct_date[0], correct_date[-1] = correct_date[-1], correct_date[0]
+    # for i, date in enumerate(dates):
 
-        dates[i] = '.'.join(correct_date)
+    # date = date.replace('/', '.')
+
+    # correct_date = date.split('.')
+    # for j, _ in enumerate(correct_date):
+    #     correct_date[j] = correct_date[j].zfill(2)
+    #
+    # if len(correct_date[0]) > len(correct_date[-1]):
+    #     correct_date[0], correct_date[-1] = correct_date[-1], correct_date[0]
+    #
+    # dates[i] = '.'.join(correct_date)
 
     return dates
 
