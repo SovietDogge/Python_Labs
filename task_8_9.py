@@ -16,7 +16,7 @@ MONTH = {'January': 31, 'March': 31, 'May': 31, 'July': 31,
 
 
 def task_1(users):
-    if len(users):
+    if users:
         return ['Admin, I hope you are well' if name == 'Admin' else f'{name}, thank you for logging in again'
                 for name in users]
     return EMPTY_USERS_WARNING
@@ -24,9 +24,7 @@ def task_1(users):
 
 def task_2(sides_count):
     sides_count = nums_validation(sides_count)
-    if sides_count in (3, 4, 5, 6):
-        return f'It is a {sides_count}-angle!'
-    return f"{sides_count} isn't a correct value"
+    return f'It is a {sides_count}-angle!' if sides_count in range(3, 7) else f"{sides_count} isn't a correct value"
 
 
 def task_3():
