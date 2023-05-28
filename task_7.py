@@ -12,17 +12,17 @@ class Point:
         return f'x = {self.__x}, y = {self.__y}'
 
     def __sub__(self, other):
-        coord_x = self.__x - other.x
-        coord_y = self.__y - other.y
+        coord_x = self.__x - other.coord_x
+        coord_y = self.__y - other.coord_y
         return Point(coord_x, coord_y)
 
     def __add__(self, other):
-        coord_x = self.__x + other.__x
-        coord_y = self.__y + other.__y
+        coord_x = self.__x + other.coord_x
+        coord_y = self.__y + other.coord_y
         return Point(coord_x, coord_y)
 
     def __eq__(self, other):
-        return self.__x == other.__x and self.__y == other.__y
+        return self.__x == other.coord_x and self.__y == other.coord_y
 
     @property
     def coord_x(self):
@@ -33,11 +33,11 @@ class Point:
         self.__x = validate(value)
 
     @property
-    def y(self):
+    def coord_y(self):
         return self.__y
 
-    @y.setter
-    def y(self, value):
+    @coord_y.setter
+    def coord_y(self, value):
         self.__y = validate(value)
 
 
@@ -48,18 +48,18 @@ class Line:
         self.__end_point = second_point
 
     def find_middle_point(self):
-        return Point(((self.__end_point.x - self.__start_point.x) / 2),
-                     (self.__end_point.y - self.__start_point.y) / 2)
+        return Point(((self.__end_point.coord_x - self.__start_point.coord_x) / 2),
+                     (self.__end_point.coord_y - self.__start_point.coord_y) / 2)
 
     def find_length(self):
-        return round(m.sqrt((self.__end_point.x - self.__start_point.x) ** 2 +
-                            (self.__end_point.y - self.__start_point.y) ** 2), 2)
+        return round(m.sqrt((self.__end_point.coord_x - self.__start_point.coord_x) ** 2 +
+                            (self.__end_point.coord_y - self.__start_point.coord_y) ** 2), 2)
 
     def find_x_projection(self):
-        return abs(self.__end_point.x - self.__start_point.x)
+        return abs(self.__end_point.coord_x - self.__start_point.coord_x)
 
     def find_y_projection(self):
-        return abs(self.__end_point.y - self.__start_point.y)
+        return abs(self.__end_point.coord_y - self.__start_point.coord_y)
 
 
 if __name__ == '__main__':
