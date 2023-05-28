@@ -90,25 +90,22 @@ def task_10():
         ''')
         with open('imdb.csv', 'r') as file:
             for line in file:
-                print(line.split(', '))
                 line = line.strip().rstrip('\n')
                 cur.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)', line.split(', '))
                 db_imdb.commit()
         cur.execute('SELECT * FROM ratings')
         db_imdb.commit()
         films = cur.fetchall()
-        print(films)
         cur.execute('''SELECT * FROM ratings
                             WHERE rating > 8.7
                             order by title''')
         db_imdb.commit()
         films += cur.fetchall()
-        print(films)
         cur.execute('''SELECT * FROM ratings
                                 order by title''')
         db_imdb.commit()
         films += cur.fetchall()
-        print(films)
+        # print(films)
         return films
 
 

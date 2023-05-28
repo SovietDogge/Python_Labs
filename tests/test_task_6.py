@@ -115,4 +115,14 @@ test_film_2, 2007, 8.0
                     'INSERT INTO ratings (title,year,rating) values(?,?,?)',
                     ['test_film_2', '2007', '8.0']),
                 cr.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)',
-                                                    ['test_film_1', '1972', '9.2'])], any_order=True)
+                           ['test_film_1', '1972', '9.2'])], any_order=True)
+
+
+def test_task_10_v2():
+    expected_value = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2), (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2), (5, 'The Big Lebowski', 1998, 8.1), (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0), (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
+    mock_op = mock_open(read_data='''test_film, 1994, 9.2
+    test_film_1, 1972, 9.2
+    test_film_2, 2007, 8.0
+    ''')
+    with patch('task_6.connect') as mock_con:
+        with patch('task_6.open', mock_op):
