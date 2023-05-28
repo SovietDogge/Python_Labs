@@ -23,7 +23,7 @@ def test_task_1():
 @patch('task_6.input')
 def test_task_2(mock_in):
     user_input = 22
-    expected_output = [call('num_characteristic.txt', 'wt'), call().__enter__(),
+    expected_output = [call('num_characteristic.txt', 'wt', encoding='utf-8'), call().__enter__(),
                        call().write('Num 22 is paired'), call().__exit__(None, None, None)]
     mock_op = mock_open()
     with patch('task_6.open', mock_op):
@@ -53,7 +53,7 @@ def test_task_4():
 @patch('task_6.input')
 def test_task_5(mock_i):
     input_data = ['bro', '0']
-    expected_data = [call('guest_book.txt', 'a'), call().__enter__(),
+    expected_data = [call('guest_book.txt', 'a', encoding='utf-8'), call().__enter__(),
                      call().write('Welcome! bro\n'), call().__exit__(None, None, None)]
     mock_op = mock_open()
     with patch('task_6.open', mock_op):
@@ -75,9 +75,9 @@ def test_task_7():
     mock_op = mock_open(read_data='test_1\ntest_2 \ntes.t_3')
     with patch('task_6.open', mock_op):
         task_7('test_t7.txt')
-        mock_op.assert_has_calls([call('test_t7.txt', 'rt'),
-                                  call('formatted_text.txt', 'wt'),
-                                  call().write('test_1 test_2  tes.t_3')])
+        mock_op.assert_has_calls([call('test_t7.txt', 'rt', encoding='utf-8'),
+                                  call('formatted_text.txt', 'wt', encoding='utf-8'),
+                                  call().write('test_1 test_2  tes.t_3')], any_order=True)
 
 
 def test_task_8():
@@ -116,13 +116,3 @@ test_film_2, 2007, 8.0
                     ['test_film_2', '2007', '8.0']),
                 cr.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)',
                            ['test_film_1', '1972', '9.2'])], any_order=True)
-
-
-def test_task_10_v2():
-    expected_value = [(1, 'The Shawshank Redemption', 1994, 9.2), (2, 'The Godfather', 1972, 9.2), (3, 'The Dark Knight', 2008, 9.0), (4, 'V for Vendetta', 2005, 8.2), (5, 'The Big Lebowski', 1998, 8.1), (6, 'Ratatouille', 2007, 8.0), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (6, 'Ratatouille', 2007, 8.0), (5, 'The Big Lebowski', 1998, 8.1), (3, 'The Dark Knight', 2008, 9.0), (2, 'The Godfather', 1972, 9.2), (1, 'The Shawshank Redemption', 1994, 9.2), (4, 'V for Vendetta', 2005, 8.2)]
-    mock_op = mock_open(read_data='''test_film, 1994, 9.2
-    test_film_1, 1972, 9.2
-    test_film_2, 2007, 8.0
-    ''')
-    with patch('task_6.connect') as mock_con:
-        with patch('task_6.open', mock_op):

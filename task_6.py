@@ -7,10 +7,10 @@ LEARN_P = 'learning_python.txt'
 
 
 def task_1(path='numbers.txt'):
-    with open(path, 'rt') as nums:
-        amount = sum([float(num) for num in nums])
+    with open(path, 'rt', encoding='utf-8') as nums:
+        amount = sum(float(num) for num in nums)
 
-    with open('amount.txt', 'wt') as file:
+    with open('amount.txt', 'wt', encoding='utf-8') as file:
         file.write(str(amount))
     return amount
 
@@ -18,27 +18,27 @@ def task_1(path='numbers.txt'):
 def task_2(path=NUM_CHECK_PAIRED):
     try:
         num = int(input('Enter any number: '))
-        with open(path, 'wt') as check_paired_file:
+        with open(path, 'wt', encoding='utf-8') as check_paired_file:
             num_status = f'Num {num} is paired' if num % 2 == 0 else f'Num {num} is not paired'
             check_paired_file.write(num_status)
-    except ValueError:
-        raise Exception('It must be a number')
+    except ValueError as exc:
+        raise ValueError('It must be a number') from exc
 
 
 def task_3(path=LEARN_P):
-    with open(path, 'rt') as file:
+    with open(path, 'rt', encoding='utf-8') as file:
         python_features = [line.rstrip('\n') for line in file]
         return python_features
 
 
 def task_4(path=LEARN_P):
-    with open(path, 'rt') as file:
+    with open(path, 'rt', encoding='utf-8') as file:
         python_features = [line.replace('Python', 'C++').rstrip('\n') for line in file]
         return python_features
 
 
 def task_5(path='guest_book.txt'):
-    with open(path, 'a') as file:
+    with open(path, 'a', encoding='utf-8') as file:
         while True:
             name = input()
             if name == '0':
@@ -48,14 +48,14 @@ def task_5(path='guest_book.txt'):
 
 
 def task_6(path='book_1.txt'):
-    with open(path, 'rt') as book:
+    with open(path, 'rt', encoding='utf-8') as book:
         return book.read().lower().count('the')
 
 
 def task_7(path):
-    with open(path, 'rt') as book:
+    with open(path, 'rt', encoding='utf-8') as book:
         formatted_book = book.read().replace('\n', ' ')
-    with open('formatted_text.txt', 'wt') as file:
+    with open('formatted_text.txt', 'wt', encoding='utf-8') as file:
         file.write(formatted_book)
 
 
@@ -88,25 +88,22 @@ def task_10():
         year INT, 
         rating FLOAT)
         ''')
-        with open('imdb.csv', 'r') as file:
+        with open('imdb.csv', 'r', encoding='utf-8') as file:
             for line in file:
                 line = line.strip().rstrip('\n')
-                cur.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)', line.split(', '))
+                cur.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)',
+                            line.split(', '))
                 db_imdb.commit()
         cur.execute('SELECT * FROM ratings')
-        db_imdb.commit()
         films = cur.fetchall()
         cur.execute('''SELECT * FROM ratings
                             WHERE rating > 8.7
                             order by title''')
-        db_imdb.commit()
         films += cur.fetchall()
         cur.execute('''SELECT * FROM ratings
                                 order by title''')
-        db_imdb.commit()
         films += cur.fetchall()
-        # print(films)
-        return films
+        print(films)
 
 
 if __name__ == '__main__':
