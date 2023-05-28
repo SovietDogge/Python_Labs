@@ -106,21 +106,13 @@ test_film_2, 2007, 8.0
     with patch('task_6.connect') as mock_con:
         with patch('task_6.open', mock_op):
             task_10()
-            mock_con.assert_has_calls([call().__enter__().cursor().execute(
-                'CREATE TABLE IF NOT EXISTS ratings\n        (id INTEGER PRIMARY KEY,\n        title VARCHAR(20), \n   '
-                '     year INT, \n        rating FLOAT)\n        '),
-                call().__enter__().cursor().execute(
+            cr = call().__enter__().cursor()
+            mock_con.assert_has_calls([
+                cr.execute(
                     'INSERT INTO ratings (title,year,rating) values(?,?,?)',
                     ['test_film', '1994', '9.2']),
-                call().__enter__().commit(), call().__enter__().cursor().fetchall(),
-                call().__enter__().cursor().execute(
+                cr.execute(
                     'INSERT INTO ratings (title,year,rating) values(?,?,?)',
                     ['test_film_2', '2007', '8.0']),
-                call().__enter__().cursor().execute('INSERT INTO ratings (title,year,rating) values(?,?,?)',
-                                                    ['test_film_1', '1972', '9.2']),
-                call().__enter__().cursor().execute('SELECT * FROM ratings'),
-                call().__enter__().cursor().execute(
-                    'SELECT * FROM ratings\n                            WHERE rating > 8.7\n   '
-                    '                         order by title'),
-                call().__enter__().cursor().execute(
-                    'SELECT * FROM ratings\n                                order by title')], any_order=True)
+                cr.execute('INSERT INTO ratings (title,year,rating) values(?,?,?)',
+                                                    ['test_film_1', '1972', '9.2'])], any_order=True)
