@@ -10,9 +10,7 @@ def task_1(path):
 
     for i, _ in enumerate(dates):
         dates[i] = re.sub(r'(\d{4})[/](\d{1,2})[/](\d{1,2})', r'\3.\2.\1', dates[i])
-
-    for i, date in enumerate(dates):
-        correct_date = date.split('.')
+        correct_date = dates[i].split('.')
         for j, _ in enumerate(correct_date):
             correct_date[j] = correct_date[j].zfill(2)
         dates[i] = '.'.join(correct_date)
